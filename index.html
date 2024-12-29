@@ -43,11 +43,12 @@
         margin-top: 5px;
       }
       .countdown {
-        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
         text-align: center;
       }
       .countdown div {
-        display: inline-block;
         margin: 0 10px;
       }
       .countdown p {
@@ -57,10 +58,27 @@
       .countdown span {
         font-size: 1rem;
       }
+      .rocket {
+        position: absolute;
+        width: 100px;
+        animation: moveRocket 3s infinite;
+      }
+      @keyframes moveRocket {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-30px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
     </style>
   </head>
   <body>
     <div class="container">
+      <!-- Image Slider -->
       <div class="slider">
         <div class="slides" id="slides">
           <div class="card">
@@ -84,12 +102,13 @@
             <div class="title">Image 5 Title</div>
           </div>
           <div class="card">
-            <img src="images/c3a2ce08-78af-44fd-9866-0e6c99fe9380.jpg" alt="Image 6" />
+            <img src="images/m6.jpg" alt="Image 6" />
             <div class="title">Image 6 Title</div>
           </div>
         </div>
       </div>
 
+      <!-- Countdown Section -->
       <div class="countdown">
         <div>
           <p id="days">00</p>
@@ -108,6 +127,9 @@
           <span>Seconds</span>
         </div>
       </div>
+
+      <!-- Rocket Animation -->
+      <img src="images/rocket.png" alt="Rocket" class="rocket" />
     </div>
 
     <script>
