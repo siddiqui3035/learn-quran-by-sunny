@@ -12,17 +12,30 @@
         overflow: hidden;
         margin-top: 20px;
         position: relative;
-        width: 100%;
-        height: 200px;
+        justify-content: center;
       }
       .slides {
         display: flex;
         transition: transform 0.5s ease-in-out;
-        width: 100%;
       }
-      .slide {
-        min-width: 100%;
-        height: 200px;
+      .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 300px;
+        height: 400px;
+        margin: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        background-color: #fff;
+      }
+      .card img {
+        width: 100%;
+        height: 70%;
+        object-fit: cover;
       }
       .countdown {
         margin-top: 20px;
@@ -45,12 +58,24 @@
     <div class="container">
       <div class="slider">
         <div class="slides" id="slides">
-          <img src="images/m.jpeg" class="slide" />
-          <img src="images/m2.jpg" class="slide" />
-          <img src="images/m3.jpg" class="slide" />
-          <img src="images/m4.jpg" class="slide" />
-          <img src="images/m5.jpg" class="slide" />
-          <img src="images/m6.jpg" class="slide" />
+          <div class="card">
+            <img src="images/m.jpeg" alt="Image 1" />
+          </div>
+          <div class="card">
+            <img src="images/m2.jpg" alt="Image 2" />
+          </div>
+          <div class="card">
+            <img src="images/m3.jpg" alt="Image 3" />
+          </div>
+          <div class="card">
+            <img src="images/m4.jpg" alt="Image 4" />
+          </div>
+          <div class="card">
+            <img src="images/m5.jpg" alt="Image 5" />
+          </div>
+          <div class="card">
+            <img src="images/m6.jpg" alt="Image 6" />
+          </div>
         </div>
       </div>
 
@@ -77,11 +102,11 @@
     <script>
       const slides = document.getElementById("slides");
       let currentIndex = 0;
-      const totalSlides = document.querySelectorAll(".slide").length;
+      const totalSlides = document.querySelectorAll(".card").length;
 
       setInterval(() => {
         currentIndex = (currentIndex + 1) % totalSlides;
-        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        slides.style.transform = `translateX(-${currentIndex * 300}px)`;
       }, 3000);
 
       var countDownDate = new Date("Dec 30, 2024 23:59:00").getTime();
