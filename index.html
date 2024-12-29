@@ -6,18 +6,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mashroor Birthday</title>
     <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .slider {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .slider img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 100%;
+        transition: left 1s ease;
+      }
+
+      .slider img.active {
+        left: 0;
+      }
+
+      .slider img.previous {
+        left: -100%;
+      }
+
+      .lounch-time div {
+        display: inline-block;
+        margin: 0 10px;
+        text-align: center;
+      }
+
+      .lounch-time p {
+        font-size: 2rem;
+        margin: 0;
+      }
+
+      .rocket {
+        width: 100px;
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
-      <img src="images/m.jpeg" class="logo" style="image-width: 250px; height: 190px;" />
-	  <img src="images/m2.jpg" class="logo" style="image-width: 250px; height: 190px;"/>
-	  <img src="images/m3.jpg" class="logo" style="image-width: 250px; height: 190px;"/>
-	  <img src="images/m4.jpg" class="logo" style="image-width: 250px; height: 190px;"/>
-	  <img src="images/m5.jpg" class="logo" style="image-width: 250px; height: 190px;"/>
-	  <img src="images/m6.jpg" class="logo" style="image-width: 250px; height: 190px;"/>
+      <div class="slider">
+        <img src="images/m.jpeg" class="active" />
+        <img src="images/m2.jpg" />
+        <img src="images/m3.jpg" />
+        <img src="images/m4.jpg" />
+        <img src="images/m5.jpg" />
+        <img src="images/m6.jpg" />
+      </div>
       <div class="content">
         <p>Mashroor Birthday 31 December</p>
-        <h1>Mashroor <span>Birthady Comming Soon</span></h1>
+        <h1>Mashroor <span>Birthday Coming Soon</span></h1>
         <div class="lounch-time">
           <div>
             <p id="days">00</p>
@@ -43,15 +106,14 @@
       <img src="images/rocket.png" class="rocket" />
     </div>
     <script>
-      var countDownDate = new Date("Dec 31, 2021 00:00:00").getTime();
-      var x = setInterval(function () {
+      // Countdown Logic
+      var countDownDate = new Date("Dec 30, 2024 23:59:00").getTime();
+      var countdownInterval = setInterval(function () {
         var now = new Date().getTime();
         var distance = countDownDate - now;
 
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
@@ -61,13 +123,29 @@
         document.getElementById("seconds").innerHTML = seconds;
 
         if (distance < 0) {
-          clearInterval(x);
+          clearInterval(countdownInterval);
           document.getElementById("days").innerHTML = "00";
           document.getElementById("hours").innerHTML = "00";
           document.getElementById("minutes").innerHTML = "00";
           document.getElementById("seconds").innerHTML = "00";
         }
       }, 1000);
+
+      // Slider Logic
+      var sliderImages = document.querySelectorAll(".slider img");
+      var currentIndex = 0;
+
+      function showNextImage() {
+        sliderImages[currentIndex].classList.remove("active");
+        sliderImages[currentIndex].classList.add("previous");
+
+        currentIndex = (currentIndex + 1) % sliderImages.length;
+
+        sliderImages[currentIndex].classList.add("active");
+        sliderImages[currentIndex].classList.remove("previous");
+      }
+
+      setInterval(showNextImage, 3000); // Change image every 3 seconds
     </script>
   </body>
 </html>
