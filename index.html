@@ -6,16 +6,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mashroor Birthday</title>
     <link rel="stylesheet" href="css/style.css" type="text/css" />
+	  <style>
+        .slider-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 400px;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .slider-button {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            color: #333;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .slider-button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: #333;
+        }
+    </style>
   </head>
   <body>
-    <div class="container">
-      <img src="images/m.jpeg" class="logo" style="image-width: 250px; height: 190px;" />
-	  <img src="images/m2.jpg" class="logo" style="image-width: 250px; height: 190px;"/>
-	  <img src="images/m3.jpg" class="logo" style="image-width: 250px; height: 190px;"/>
-	  <img src="images/m4.jpg" class="logo" style="image-width: 250px; height: 190px;"/>
-	  <img src="images/m5.jpg" class="logo" style="image-width: 250px; height: 190px;"/>
-	  <img src="images/m6.jpg" class="logo" style="image-width: 250px; height: 190px;"/>
-	  <img src="images/c3a2ce08-78af-44fd-9866-0e6c99fe9380.jpg" class="logo" style="image-width: 250px; height: 190px;"/>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide">
+                <img src="images/m.jpeg" alt="Image 1">
+            </div>
+            <div class="slide">
+                <img src="images/m2.jpg" alt="Image 2">
+            </div>
+            <div class="slide">
+                <img src="images/m3.jpg" alt="Image 3">
+            </div>
+            <div class="slide">
+                <img src="images/m4.jpg" alt="Image 4">
+            </div>
+            <div class="slide">
+                <img src="images/m5.jpg" alt="Image 5">
+            </div>
+            <div class="slide">
+                <img src="images/m6.jpg" alt="Image 6">
+            </div>
+            <div class="slide">
+                <img src="images/c3a2ce08-78af-44fd-9866-0e6c99fe9380.jpg" alt="Image 7">
+            </div>
+        </div>
+        <div class="slider-buttons">
+            <button class="slider-button" onclick="prevSlide()">←</button>
+            <button class="slider-button" onclick="nextSlide()">→</button>
+        </div>
+        <div class="dots-container" id="dots"></div>
       <div class="content">
         <p>Mashroor Birthday 31 December</p>
         <h1>Mashroor <span>Birthady Comming Soon</span></h1>
