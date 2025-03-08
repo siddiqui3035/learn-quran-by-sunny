@@ -2,299 +2,973 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashroor Birthday</title>
+    <title>Noor - Learn Quran Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Essential CSS */
+        :root {
+            /* Light Mode Variables */
+            --primary: #2E8B57;
+            --primary-dark: #1e5e3a;
+            --accent: #ffc045;
+            --text-dark: #333;
+            --text-light: #f5f5f5;
+            --background-light: #ffffff;
+            --card-background-light: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            
+            /* Dark Mode Variables */
+            --primary-dark-mode: #3ea86c;
+            --accent-dark-mode: #ffcd6b;
+            --background-dark: #121212;
+            --card-background-dark: #1e1e1e;
+            --text-dark-mode: #e0e0e0;
+            --text-secondary-dark: #aaaaaa;
+            --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark-mode {
+            --primary: var(--primary-dark-mode);
+            --accent: var(--accent-dark-mode);
+            --text-dark: var(--text-dark-mode);
+            --background-light: var(--background-dark);
+            --card-background-light: var(--card-background-dark);
+            --shadow: var(--shadow-dark);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Parallax Elements */
+        .parallax-container {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: translateZ(-1px) scale(2);
+            z-index: -1;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .parallax-content {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: translateZ(0);
+            z-index: 1;
         }
 
         .container {
             width: 100%;
-            min-height: 100vh;
-            background: linear-gradient(45deg, #1d0066, #200087);
-            padding: 10px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .slider-container {
-            width: 100%;
-            max-width: 800px;
-            height: 400px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .slider {
-            display: flex;
-            transition: transform 0.4s ease-in-out;
-            height: 100%;
-        }
-
-        .slide {
-            min-width: 100%;
-            height: 100%;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .slider-buttons {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 0 20px;
         }
 
-        .slider-button {
-            background-color: rgba(255, 255, 255, 0.7);
-            border: none;
-            color: #333;
-            cursor: pointer;
-            padding: 10px 15px;
-            border-radius: 50%;
-            font-size: 18px;
-            transition: background-color 0.3s;
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
         }
 
-        .dots-container {
+        .header-container {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-top: -30px;
+            font-size: 1.6rem;
+            font-weight: bold;
+            font-family: 'Amiri', serif;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            margin-left: 1.5rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--accent);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .toggle-icon {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 5rem 0;
+            margin-top: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero .container {
             position: relative;
             z-index: 2;
         }
 
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: background-color 0.3s;
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .dot.active {
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: white;
+        }
+
+        .hero .arabic {
+            font-family: 'Amiri', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            direction: rtl;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--text-dark);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: #e6a93b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
             background-color: white;
+            color: var(--primary);
         }
 
-        .content {
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-title {
             text-align: center;
-            color: white;
-            margin-top: 20px;
+            margin-bottom: 3rem;
+            position: relative;
         }
 
-        .content p {
-            font-size: 18px;
-            margin-bottom: 15px;
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            position: relative;
         }
 
-        .content h1 {
-            font-size: 40px;
-            margin-bottom: 25px;
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+            transform: translateX(-50%);
         }
 
-        .content h1 span {
-            color: #ff004f;
+        .alphabet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 1rem;
         }
 
-        .lounch-time {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .lounch-time div {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px 30px;
-            border-radius: 8px;
-            backdrop-filter: blur(5px);
-        }
-
-        .lounch-time div p {
-            font-size: 36px;
-            margin: 0;
-        }
-
-        .lounch-time div span {
-            font-size: 14px;
-        }
-
-        button {
-            background: #ff004f;
-            border: 0;
-            outline: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            color: white;
-            margin-top: 30px;
-            cursor: pointer;
-            font-weight: 500;
+        .letter-card {
+            height: 80px;
             display: flex;
             align-items: center;
+            justify-content: center;
+            background-color: var(--card-background-light);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            position: relative;
         }
 
-        button img {
-            width: 20px;
-            margin-left: 10px;
+        .dark-mode .letter-card {
+            border-color: #333;
         }
 
-        .rocket {
-            width: 250px;
+        .letter-card:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .letter-card .transliteration {
             position: absolute;
-            right: 10%;
-            bottom: 0;
-            animation: rocket 4s linear infinite;
+            bottom: 5px;
+            font-size: 0.7rem;
+            font-family: 'Poppins', sans-serif;
         }
 
-        @keyframes rocket {
-            0% { bottom: 0; opacity: 0; }
-            100% { bottom: 105%; opacity: 1; }
+        /* Surah Section */
+        .surahs {
+            padding: 6rem 0;
+            background-color: var(--background-light);
+        }
+
+        .surah-selector {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .surah-selector label {
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+
+        .surah-selector select {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            background-color: var(--card-background-light);
+            color: var(--text-dark);
+            border: 1px solid #e0e0e0;
+        }
+
+        .dark-mode .surah-selector select {
+            border-color: #333;
+        }
+
+        .surah-content {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .surah-arabic, .surah-bangla {
+            flex: 1;
+            background-color: var(--card-background-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .surah-arabic {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            text-align: right;
+            direction: rtl;
+        }
+
+        .surah-bangla {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .verse {
+            margin-bottom: 1.5rem;
+        }
+
+        .verse-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Parallax Divider */
+        .parallax-divider {
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .parallax-divider-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: -1;
+        }
+
+        .parallax-divider-content {
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .parallax-divider-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .parallax-divider-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        footer {
+            background-color: #1a2a3a;
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loader */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-dark);
+        }
+
+        .loading:after {
+            content: "...";
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: "."; }
+            40% { content: ".."; }
+            60%, 100% { content: "..."; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+            }
+
+            .surah-content {
+                flex-direction: column;
+            }
+
+            .parallax-divider {
+                height: 300px;
+            }
+
+            .parallax-divider-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .parallax-divider-content p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="slider-container">
-            <div class="slider">
-                <div class="slide">
-                    <img src="images/m.jpeg" alt="Mashroor 1">
-                </div>
-                <div class="slide">
-                    <img src="images/m2.jpg" alt="Mashroor 2">
-                </div>
-                <div class="slide">
-                    <img src="images/m3.jpg" alt="Mashroor 3">
-                </div>
-                <div class="slide">
-                    <img src="images/m4.jpg" alt="Mashroor 4">
-                </div>
-                <div class="slide">
-                    <img src="images/m5.jpg" alt="Mashroor 5">
-                </div>
-                <div class="slide">
-                    <img src="images/m6.jpg" alt="Mashroor 6">
-                </div>
-                <div class="slide">
-                    <img src="images/c3a2ce08-78af-44fd-9866-0e6c99fe9380.jpg" alt="Mashroor 7">
-                </div>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">ن</div>
+                <span>Noor</span>
             </div>
-            <div class="slider-buttons">
-                <button class="slider-button" onclick="prevSlide()">←</button>
-                <button class="slider-button" onclick="nextSlide()">→</button>
-            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#alphabet">Arabic Alphabet</a></li>
+                    <li><a href="#surahs">Surahs</a></li>
+                </ul>
+                <div class="dark-mode-toggle">
+                    <span class="toggle-icon">☀️</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="dark-mode-toggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </nav>
         </div>
-        <div class="dots-container" id="dots"></div>
+    </header>
 
-        <div class="content">
-            <p>Mashroor Birthday 31 December</p>
-            <h1>Mashroor <span>Birthday Coming Soon</span></h1>
-            <div class="lounch-time">
-                <div>
-                    <p id="days">00</p>
-                    <span>Days</span>
+    <!-- Hero Section -->
+    <section id="home" class="hero parallax-container">
+        <div class="parallax-bg" style="background-image: url('https://via.placeholder.com/1920x1080');"></div>
+        <div class="hero-overlay"></div>
+        <div class="container parallax-content">
+            <h1>Learn Quran Online</h1>
+            <p class="arabic">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</p>
+            <p>Begin your journey to learn the Holy Quran with step-by-step lessons, interactive exercises, and authentic resources.</p>
+            <div class="hero-buttons">
+                <a href="#lessons" class="btn">Start Learning</a>
+                <a href="#about" class="btn btn-outline">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Arabic Alphabet Section -->
+    <section id="alphabet" class="section fade-in">
+        <div class="container">
+            <div class="section-title">
+                <h2>Arabic Alphabet</h2>
+            </div>
+            <p style="text-align: center; margin-bottom: 2rem;">Click on each letter to hear its pronunciation</p>
+            <div class="alphabet-grid">
+                <div class="letter-card" onclick="playLetter('ا')">
+                    ا
+                    <span class="transliteration">Alif</span>
                 </div>
-                <div>
-                    <p id="hours">00</p>
-                    <span>Hours</span>
+                <div class="letter-card" onclick="playLetter('ب')">
+                    ب
+                    <span class="transliteration">Ba</span>
                 </div>
-                <div>
-                    <p id="minutes">00</p>
-                    <span>Minutes</span>
+                <div class="letter-card" onclick="playLetter('ت')">
+                    ت
+                    <span class="transliteration">Ta</span>
                 </div>
-                <div>
-                    <p id="seconds">00</p>
-                    <span>Seconds</span>
+                <div class="letter-card" onclick="playLetter('ث')">
+                    ث
+                    <span class="transliteration">Tha</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ج')">
+                    ج
+                    <span class="transliteration">Jeem</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ح')">
+                    ح
+                    <span class="transliteration">Ha</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('خ')">
+                    خ
+                    <span class="transliteration">Kha</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('د')">
+                    د
+                    <span class="transliteration">Dal</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ذ')">
+                    ذ
+                    <span class="transliteration">Dhal</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ر')">
+                    ر
+                    <span class="transliteration">Ra</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ز')">
+                    ز
+                    <span class="transliteration">Za</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('س')">
+                    س
+                    <span class="transliteration">Seen</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ش')">
+                    ش
+                    <span class="transliteration">Sheen</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ص')">
+                    ص
+                    <span class="transliteration">Sad</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ض')">
+                    ض
+                    <span class="transliteration">Dad</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ط')">
+                    ط
+                    <span class="transliteration">Ta</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ظ')">
+                    ظ
+                    <span class="transliteration">Dha</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ع')">
+                    ع
+                    <span class="transliteration">Ayn</span>
+                </div>
+                <div class="letter-card mb-2" onclick="playLetter('غ')">
+                    غ
+                    <span class="transliteration">Ghayn</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ف')">
+                    ف
+                    <span class="transliteration">Fa</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ق')">
+                    ق
+                    <span class="transliteration">Qaf</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ك')">
+                    ك
+                    <span class="transliteration">Kaf</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ل')">
+                    ل
+                    <span class="transliteration">Lam</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('م')">
+                    م
+                    <span class="transliteration">Meem</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ن')">
+                    ن
+                    <span class="transliteration">Noon</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ه')">
+                    ه
+                    <span class="transliteration">Ha</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('و')">
+                    و
+                    <span class="transliteration">Waw</span>
+                </div>
+                <div class="letter-card" onclick="playLetter('ي')">
+                    ي
+                    <span class="transliteration">Ya</span>
                 </div>
             </div>
-            <button type="button">
-                Learn More<img src="images/triangle.png" alt="triangle" />
-            </button>
         </div>
-        <img src="images/rocket.png" class="rocket" alt="rocket" />
+    </section>
+
+    <!-- Parallax Divider 2 -->
+    <div class="parallax-divider">
+        <div class="parallax-divider-bg" style="background-image: url('https://via.placeholder.com/1920x1080'); background-position: center bottom;"></div>
+        <div class="hero-overlay"></div>
+        <div class="parallax-divider-content">
+            <h2>Explore the Quran</h2>
+            <p>Access all 114 Surahs with translations to deepen your understanding of the divine message.</p>
+        </div>
     </div>
 
-    <script>
-        // Slider functionality
-        const slider = document.querySelector('.slider');
-        const slides = document.querySelectorAll('.slide');
-        const dotsContainer = document.getElementById('dots');
-        let currentSlide = 0;
-        const totalSlides = slides.length;
+    <!-- Surah Section -->
+    <section id="surahs" class="surahs fade-in">
+        <div class="container">
+            <div class="section-title">
+                <h2>All Surahs with Bangla Tarjama</h2>
+            </div>
+            <div class="surah-selector">
+                <label for="surah-select">Select Surah:</label>
+                <select id="surah-select">
+                    <option value="">Loading Surahs...</option>
+                </select>
+            </div>
+            <div class="surah-content">
+                <div class="surah-arabic" id="surah-arabic">
+                    <div class="loading">Loading Arabic text</div>
+                </div>
+                <div class="surah-bangla" id="surah-bangla">
+                    <div class="loading">Loading Bangla translation</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // Create dots
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('div');
-            dot.className = `dot ${i === 0 ? 'active' : ''}`;
-            dot.onclick = () => goToSlide(i);
-            dotsContainer.appendChild(dot);
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Noor</h3>
+                    <p>Noor is an online platform dedicated to helping you learn the Quran with ease and confidence.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#alphabet">Arabic Alphabet</a></li>
+                        <li><a href="#surahs">Surahs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@noor.com">info@noor.com</a></li>
+                        <li><a href="tel:+123456789">+123 456 789</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Noor. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=dath0RDr"></script>
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+        const toggleIcon = document.querySelector('.toggle-icon');
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeToggle.checked = true;
+            toggleIcon.textContent = '🌙';
         }
 
-        function updateSlider() {
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-            document.querySelectorAll('.dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
+        // Dark mode toggle event listener
+        darkModeToggle.addEventListener('change', () => {
+            if (darkModeToggle.checked) {
+                body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'enabled');
+                toggleIcon.textContent = '🌙';
+            } else {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'disabled');
+                toggleIcon.textContent = '☀️';
+            }
+        });
+
+        // Parallax Scrolling Effect
+        window.addEventListener('scroll', function() {
+            const parallaxElements = document.querySelectorAll('.parallax-bg');
+            let scrollPosition = window.pageYOffset;
+            
+            parallaxElements.forEach(element => {
+                let speed = 0.5;
+                element.style.transform = 'translateY(' + scrollPosition * speed + 'px)';
+            });
+        });
+
+        // Scroll Animation
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        function checkFade() {
+            const triggerBottom = window.innerHeight * 0.8;
+            
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                
+                if (elementTop < triggerBottom) {
+                    element.classList.add('active');
+                }
             });
         }
+        
+        window.addEventListener('scroll', checkFade);
+        window.addEventListener('load', checkFade);
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlider();
+        // Function to play Arabic letter pronunciation
+        function playLetter(letter) {
+            responsiveVoice.speak(letter, "Arabic Male");
         }
 
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        }
+        // Function to fetch and display Surah data
+        async function fetchSurah(surahNumber) {
+            try {
+                const surahArabic = document.getElementById('surah-arabic');
+                const surahBangla = document.getElementById('surah-bangla');
+                surahArabic.innerHTML = '<div class="loading">Loading Arabic text</div>';
+                surahBangla.innerHTML = '<div class="loading">Loading Bangla translation</div>';
 
-        function goToSlide(index) {
-            currentSlide = index;
-            updateSlider();
-        }
+                // Fetch Arabic text
+                const arabicResponse = await fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}/ar.alafasy`);
+                const arabicData = await arabicResponse.json();
 
-        // Auto-play slider
-        setInterval(nextSlide, 5000);
+                // Fetch Bangla translation
+                const banglaResponse = await fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}/bn.bengali`);
+                const banglaData = await banglaResponse.json();
 
-        // Countdown timer
-        var countDownDate = new Date("Dec 31, 2024 00:00:00").getTime();
-        var x = setInterval(function() {
-            var now = new Date().getTime();
-            var distance = countDownDate - now;
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                // Generate Arabic content
+                let arabicContent = '';
+                arabicData.data.ayahs.forEach(ayah => {
+                    arabicContent += `
+                        <div class="verse">
+                            <span class="verse-number">${ayah.numberInSurah}</span>
+                            ${ayah.text}
+                        </div>
+                    `;
+                });
 
-            document.getElementById("days").innerHTML = days;
-            document.getElementById("hours").innerHTML = hours;
-            document.getElementById("minutes").innerHTML = minutes;
-            document.getElementById("seconds").innerHTML = seconds;
+                // Generate Bangla content
+                let banglaContent = '';
+                banglaData.data.ayahs.forEach(ayah => {
+                    banglaContent += `
+                        <div class="verse">
+                            <span class="verse-number">${ayah.numberInSurah}</span>
+                            ${ayah.text}
+                        </div>
+                    `;
+                });
 
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("days").innerHTML = "00";
-                document.getElementById("hours").innerHTML = "00";
-                document.getElementById("minutes").innerHTML = "00";
-                document.getElementById("seconds").innerHTML = "00";
+                // Update the DOM
+                surahArabic.innerHTML = arabicContent;
+                surahBangla.innerHTML = banglaContent;
+            } catch (error) {
+                console.error('Error fetching Surah data:', error);
+                surahArabic.innerHTML = '<div class="error">Failed to load Arabic text</div>';
+                surahBangla.innerHTML = '<div class="error">Failed to load Bangla translation</div>';
             }
-        }, 1000);
+        }
+
+        // Populate Surah Selector
+        async function populateSurahSelector() {
+            const surahSelect = document.getElementById('surah-select');
+            try {
+                const response = await fetch('https://api.alquran.cloud/v1/surah');
+                const data = await response.json();
+                surahSelect.innerHTML = '<option value="">Select a Surah</option>';
+                data.data.forEach(surah => {
+                    const option = document.createElement('option');
+                    option.value = surah.number;
+                    option.textContent = `${surah.number}. ${surah.englishName} (${surah.name})`;
+                    surahSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error fetching Surah list:', error);
+                surahSelect.innerHTML = '<option value="">Failed to load Surahs</option>';
+            }
+        }
+
+        // Event listener for Surah selection
+        document.getElementById('surah-select').addEventListener('change', function() {
+            const surahNumber = this.value;
+            if (surahNumber) {
+                fetchSurah(surahNumber);
+            }
+        });
+
+        // Initialize the page
+        populateSurahSelector();
     </script>
 </body>
 </html>
