@@ -752,11 +752,12 @@
           interactive exercises, and authentic resources.
         </p>
         <div class="hero-buttons">
-          <a href="#lessons" class="btn">Start Learning</a>
-          <a href="#about" class="btn btn-outline">Learn More</a>
+          <a href="#alphabet" class="btn">Start Learning</a>
+          <a href="#surahs" class="btn btn-outline">Learn More</a>
         </div>
       </div>
     </section>
+
     <!-- Prayer Times Section -->
     <section id="prayer-times" class="section fade-in">
       <div class="container">
@@ -782,6 +783,7 @@
         </div>
       </div>
     </section>
+
     <!-- Parallax Divider 1 -->
     <div class="parallax-divider">
       <div
@@ -1853,6 +1855,13 @@
           // Extract prayer times
           const timings = data.data.timings;
 
+          // Check if the current month is Ramadan
+          const hijriMonth = data.data.date.hijri.month.number;
+          const isRamadan = hijriMonth === 3; // Ramadan is the 9th month in the Hijri calendar
+
+          console.log("Hijri Month:", hijriMonth); // Debugging: Check Hijri month
+          console.log("API Response:", data); // Debugging: Check API response
+
           // Clear loading message
           prayerTimesGrid.innerHTML = "";
 
@@ -1868,6 +1877,30 @@
             `;
             prayerTimesGrid.appendChild(prayerTimeCard);
           });
+
+          // Display Iftar and Suhoor times during Ramadan
+          if (isRamadan) {
+            const iftarTime = timings["Maghrib"]; // Iftar time is Maghrib time
+            const suhoorTime = timings["Fajr"]; // Suhoor time is Fajr time
+
+            const iftarCard = document.createElement("div");
+            iftarCard.classList.add("prayer-time-card");
+            iftarCard.innerHTML = `
+                <h3>Iftar</h3>
+                <p>${iftarTime}</p>
+                <small>Break fast at sunset</small>
+            `;
+            prayerTimesGrid.appendChild(iftarCard);
+
+            const suhoorCard = document.createElement("div");
+            suhoorCard.classList.add("prayer-time-card");
+            suhoorCard.innerHTML = `
+                <h3>Suhoor</h3>
+                <p>${suhoorTime}</p>
+                <small>Pre-dawn meal before Fajr</small>
+            `;
+            prayerTimesGrid.appendChild(suhoorCard);
+          }
 
           // Display current Waqt
           const currentWaqt = getCurrentWaqt(timings);
