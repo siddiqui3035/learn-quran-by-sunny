@@ -95,6 +95,7 @@
         padding: 0 20px;
       }
 
+      /* Header */
       header {
         background-color: var(--primary);
         color: white;
@@ -111,6 +112,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
       }
 
       .logo {
@@ -135,6 +137,22 @@
         font-family: "Amiri", serif;
       }
 
+      /* Hamburger Menu */
+      .hamburger-menu {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+      }
+
+      .hamburger-menu span {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        transition: all 0.3s;
+      }
+
+      /* Navigation */
       nav {
         display: flex;
         align-items: center;
@@ -216,6 +234,7 @@
         font-size: 18px;
       }
 
+      /* Hero Section */
       .hero {
         height: 100vh;
         display: flex;
@@ -267,6 +286,7 @@
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
       }
 
+      /* Buttons */
       .btn {
         display: inline-block;
         background-color: var(--accent);
@@ -299,6 +319,7 @@
         color: var(--primary);
       }
 
+      /* Sections */
       .section {
         padding: 6rem 0;
         position: relative;
@@ -327,6 +348,7 @@
         transform: translateX(-50%);
       }
 
+      /* Alphabet Grid */
       .alphabet-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
@@ -396,7 +418,6 @@
         border-color: #333;
       }
 
-      /* Surah Content */
       .surah-content {
         display: flex;
         gap: 2rem;
@@ -487,6 +508,7 @@
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
       }
 
+      /* Footer */
       footer {
         background-color: #1a2a3a;
         color: white;
@@ -581,42 +603,6 @@
         }
       }
 
-      @media (max-width: 768px) {
-        .hero h1 {
-          font-size: 2rem;
-        }
-
-        .hero p {
-          font-size: 1rem;
-        }
-
-        .btn {
-          display: block;
-          width: 100%;
-          margin-bottom: 1rem;
-        }
-
-        .btn-outline {
-          margin-left: 0;
-        }
-
-        .surah-content {
-          flex-direction: column;
-        }
-
-        .parallax-divider {
-          height: 300px;
-        }
-
-        .parallax-divider-content h2 {
-          font-size: 1.8rem;
-        }
-
-        .parallax-divider-content p {
-          font-size: 1rem;
-        }
-      }
-
       /* Prayer Times Section */
       .prayer-times-grid {
         display: grid;
@@ -653,9 +639,73 @@
       #current-waqt {
         color: var(--primary);
       }
+
+      /* Mobile Styles */
+      @media (max-width: 768px) {
+        .hamburger-menu {
+          display: flex;
+        }
+
+        nav {
+          display: none;
+          width: 100%;
+          flex-direction: column;
+          align-items: flex-start;
+          margin-top: 1rem;
+        }
+
+        nav ul {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        nav.active {
+          display: flex;
+        }
+
+        .dark-mode-toggle {
+          margin-left: 0;
+          margin-top: 1rem;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+
+        .btn {
+          display: block;
+          width: 100%;
+          margin-bottom: 1rem;
+        }
+
+        .btn-outline {
+          margin-left: 0;
+        }
+
+        .surah-content {
+          flex-direction: column;
+        }
+
+        .parallax-divider {
+          height: 300px;
+        }
+
+        .parallax-divider-content h2 {
+          font-size: 1.8rem;
+        }
+
+        .parallax-divider-content p {
+          font-size: 1rem;
+        }
+      }
     </style>
   </head>
   <body>
+    <!-- Header -->
     <!-- Header -->
     <header>
       <div class="container header-container">
@@ -663,7 +713,14 @@
           <div class="logo-icon">ن</div>
           <span>Noor</span>
         </div>
-        <nav>
+        <!-- Hamburger Menu Icon -->
+        <div class="hamburger-menu" id="hamburger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <!-- Navigation -->
+        <nav id="nav-menu">
           <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#alphabet">Arabic Alphabet</a></li>
@@ -1501,7 +1558,7 @@
       <div
         class="parallax-divider-bg"
         style="
-          background-image: url('banner.png');
+          background-image: url('https://via.placeholder.com/1920x1080');
           background-position: center bottom;
         "
       ></div>
@@ -1575,6 +1632,13 @@
     <!-- Scripts -->
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=dath0RDr"></script>
     <script>
+      // Toggle Hamburger Menu
+      const hamburgerMenu = document.getElementById("hamburger-menu");
+      const navMenu = document.getElementById("nav-menu");
+
+      hamburgerMenu.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
       // Dark Mode Toggle
       const darkModeToggle = document.getElementById("dark-mode-toggle");
       const body = document.body;
