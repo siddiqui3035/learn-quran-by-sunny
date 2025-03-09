@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" sizes="16x16" href="facicon.ico">
-    <title>Noor - Learn Quran Online</title>
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="facicon.ico" />
+    <title>Taealam alquran - Learn Quran Online</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -578,18 +578,6 @@
         transform: translateY(0);
       }
 
-      /* Loader */
-      .loading {
-        text-align: center;
-        padding: 2rem;
-        color: var(--text-dark);
-      }
-
-      .loading:after {
-        content: "...";
-        animation: dots 1.5s steps(5, end) infinite;
-      }
-
       @keyframes dots {
         0%,
         20% {
@@ -704,6 +692,59 @@
         }
       }
     </style>
+
+    <style>
+      /* Skeleton Loader */
+      .skeleton {
+        background-color: #e0e0e0;
+        border-radius: 4px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .skeleton::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.5),
+          transparent
+        );
+        animation: shimmer 1.5s infinite;
+      }
+
+      @keyframes shimmer {
+        100% {
+          left: 100%;
+        }
+      }
+
+      /* Verse Skeleton */
+      .verse-skeleton {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 1.5rem;
+      }
+
+      .verse-skeleton .verse-number {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #ccc;
+      }
+
+      .verse-skeleton .verse-text {
+        flex: 1;
+        height: 20px;
+        border-radius: 4px;
+      }
+    </style>
   </head>
   <body>
     <!-- Header -->
@@ -712,10 +753,9 @@
       <div class="container header-container">
         <div class="logo">
           <div class="logo-icon">
-            <img src="logo.png" width="100px" alt="">
+            <img src="logo.png" width="100px" alt="" />
           </div>
-          <span>Taealam alquran
-          </span>
+          <span>Taealam alquran </span>
         </div>
         <!-- Hamburger Menu Icon -->
         <div class="hamburger-menu" id="hamburger-menu">
@@ -1642,17 +1682,20 @@
         <div class="surah-selector">
           <label for="surah-select">Select Surah:</label>
           <select id="surah-select">
-            <option value="">Loading Surahs...</option>
+            <option value="">Select a Surah</option>
           </select>
         </div>
         <div class="surah-content">
           <div class="surah-arabic" id="surah-arabic">
+            <!-- Skeleton Loader for Arabic Text -->
             <div class="loading">Loading Arabic text</div>
           </div>
           <div class="surah-bangla" id="surah-bangla">
+            <!-- Skeleton Loader for Bangla Translation -->
             <div class="loading">Loading Bangla translation</div>
           </div>
           <div class="surah-english" id="surah-english">
+            <!-- Skeleton Loader for English Translation -->
             <div class="loading">Loading English translation</div>
           </div>
         </div>
@@ -1666,8 +1709,8 @@
           <div class="footer-column">
             <h3>About Noor</h3>
             <p>
-              Taealam alquran is an online platform dedicated to helping you learn the
-              Quran with ease and confidence.
+              Taealam alquran is an online platform dedicated to helping you
+              learn the Quran with ease and confidence.
             </p>
           </div>
           <div class="footer-column">
@@ -1681,12 +1724,18 @@
           <div class="footer-column">
             <h3>Contact Us</h3>
             <ul class="footer-links">
-              <li><a href="mailto:s.h.siddiqui5830@gmail.com">s.h.siddiqui5830@gmail.com</a></li>
+              <li>
+                <a href="mailto:s.h.siddiqui5830@gmail.com"
+                  >s.h.siddiqui5830@gmail.com</a
+                >
+              </li>
               <li><a href="tel:+8801677273025">+880 1677273025</a></li>
             </ul>
           </div>
         </div>
-        <div class="copyright">&copy; 2025 Taealam alquran . All rights reserved.</div>
+        <div class="copyright">
+          &copy; 2025 Taealam alquran . All rights reserved.
+        </div>
       </div>
     </footer>
 
@@ -1774,6 +1823,34 @@
       function playLetterWithPesh(letter, pronunciation) {
         responsiveVoice.speak(pronunciation, "Arabic Male");
       }
+    </script>
+
+    <script>
+      // Function to generate skeleton loader
+      function generateSkeletonLoader() {
+        let skeletonHTML = "";
+        for (let i = 0; i < 1; i++) {
+          skeletonHTML += `
+      <div class="verse-skeleton">
+        <div class="verse-number skeleton"></div>
+        <div class="verse-text skeleton"></div>
+      </div>
+    `;
+        }
+        return skeletonHTML;
+      }
+
+      // Function to initialize skeleton loaders
+      function initializeSkeletonLoaders() {
+        const surahArabic = document.getElementById("surah-arabic");
+        const surahBangla = document.getElementById("surah-bangla");
+        const surahEnglish = document.getElementById("surah-english");
+
+        // Show skeleton loaders for all sections
+        surahArabic.innerHTML = generateSkeletonLoader();
+        surahBangla.innerHTML = generateSkeletonLoader();
+        surahEnglish.innerHTML = generateSkeletonLoader();
+      }
 
       // Function to fetch and display Surah data
       async function fetchSurah(surahNumber) {
@@ -1782,13 +1859,10 @@
           const surahBangla = document.getElementById("surah-bangla");
           const surahEnglish = document.getElementById("surah-english");
 
-          // Show loading messages
-          surahArabic.innerHTML =
-            '<div class="loading">Loading Arabic text</div>';
-          surahBangla.innerHTML =
-            '<div class="loading">Loading Bangla translation</div>';
-          surahEnglish.innerHTML =
-            '<div class="loading">Loading English translation</div>';
+          // Show skeleton loaders for all sections
+          surahArabic.innerHTML = generateSkeletonLoader();
+          surahBangla.innerHTML = generateSkeletonLoader();
+          surahEnglish.innerHTML = generateSkeletonLoader();
 
           // Fetch Arabic text
           const arabicResponse = await fetch(
@@ -1812,33 +1886,33 @@
           let arabicContent = "";
           arabicData.data.ayahs.forEach((ayah) => {
             arabicContent += `
-                <div class="verse">
-                    <span class="verse-number">${ayah.numberInSurah}</span>
-                    ${ayah.text}
-                </div>
-            `;
+          <div class="verse">
+              <span class="verse-number">${ayah.numberInSurah}</span>
+              ${ayah.text}
+          </div>
+      `;
           });
 
           // Generate Bangla content
           let banglaContent = "";
           banglaData.data.ayahs.forEach((ayah) => {
             banglaContent += `
-                <div class="verse">
-                    <span class="verse-number">${ayah.numberInSurah}</span>
-                    ${ayah.text}
-                </div>
-            `;
+          <div class="verse">
+              <span class="verse-number">${ayah.numberInSurah}</span>
+              ${ayah.text}
+          </div>
+      `;
           });
 
           // Generate English content
           let englishContent = "";
           englishData.data.ayahs.forEach((ayah) => {
             englishContent += `
-                <div class="verse">
-                    <span class="verse-number">${ayah.numberInSurah}</span>
-                    ${ayah.text}
-                </div>
-            `;
+          <div class="verse">
+              <span class="verse-number">${ayah.numberInSurah}</span>
+              ${ayah.text}
+          </div>
+      `;
           });
 
           // Update the DOM
@@ -1887,6 +1961,7 @@
         });
 
       // Initialize the page
+      initializeSkeletonLoaders(); // Show skeleton loaders on page load
       populateSurahSelector();
     </script>
 
