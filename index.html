@@ -1,974 +1,1877 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noor - Learn Quran Online</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        /* Essential CSS */
-        :root {
-            /* Light Mode Variables */
-            --primary: #2E8B57;
-            --primary-dark: #1e5e3a;
-            --accent: #ffc045;
-            --text-dark: #333;
-            --text-light: #f5f5f5;
-            --background-light: #ffffff;
-            --card-background-light: #ffffff;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            
-            /* Dark Mode Variables */
-            --primary-dark-mode: #3ea86c;
-            --accent-dark-mode: #ffcd6b;
-            --background-dark: #121212;
-            --card-background-dark: #1e1e1e;
-            --text-dark-mode: #e0e0e0;
-            --text-secondary-dark: #aaaaaa;
-            --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
+      /* Essential CSS */
+      :root {
+        /* Light Mode Variables */
+        --primary: #2e8b57;
+        --primary-dark: #1e5e3a;
+        --accent: #ffc045;
+        --text-dark: #333;
+        --text-light: #f5f5f5;
+        --background-light: #ffffff;
+        --card-background-light: #ffffff;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-        .dark-mode {
-            --primary: var(--primary-dark-mode);
-            --accent: var(--accent-dark-mode);
-            --text-dark: var(--text-dark-mode);
-            --background-light: var(--background-dark);
-            --card-background-light: var(--card-background-dark);
-            --shadow: var(--shadow-dark);
-        }
+        /* Dark Mode Variables */
+        --primary-dark-mode: #3ea86c;
+        --accent-dark-mode: #ffcd6b;
+        --background-dark: #121212;
+        --card-background-dark: #1e1e1e;
+        --text-dark-mode: #e0e0e0;
+        --text-secondary-dark: #aaaaaa;
+        --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        }
+      .dark-mode {
+        --primary: var(--primary-dark-mode);
+        --accent: var(--accent-dark-mode);
+        --text-dark: var(--text-dark-mode);
+        --background-light: var(--background-dark);
+        --card-background-light: var(--card-background-dark);
+        --shadow: var(--shadow-dark);
+      }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+      }
 
-        /* Parallax Elements */
-        .parallax-container {
-            position: relative;
-            height: 100vh;
-            overflow: hidden;
-            transform-style: preserve-3d;
-        }
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--background-light);
+        color: var(--text-dark);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
 
-        .parallax-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            transform: translateZ(-1px) scale(2);
-            z-index: -1;
-            background-position: center;
-            background-size: cover;
-        }
+      /* Parallax Elements */
+      .parallax-container {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+        transform-style: preserve-3d;
+      }
 
-        .parallax-content {
-            position: relative;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transform: translateZ(0);
-            z-index: 1;
-        }
+      .parallax-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: translateZ(-1px) scale(2);
+        z-index: -1;
+        background-position: center;
+        background-size: cover;
+      }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+      .parallax-content {
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: translateZ(0);
+        z-index: 1;
+      }
 
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem 0;
-            box-shadow: var(--shadow);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
 
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+      header {
+        background-color: var(--primary);
+        color: white;
+        padding: 1rem 0;
+        box-shadow: var(--shadow);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(5px);
+      }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: white;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            font-weight: bold;
-            font-family: 'Amiri', serif;
-        }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
 
-        nav {
-            display: flex;
-            align-items: center;
-        }
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: white;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        font-weight: bold;
+        font-family: "Amiri", serif;
+      }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
+      nav {
+        display: flex;
+        align-items: center;
+      }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+      }
 
-        nav a:hover {
-            color: var(--accent);
-        }
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: color 0.3s;
+      }
 
-        /* Dark Mode Toggle */
-        .dark-mode-toggle {
-            margin-left: 1.5rem;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
+      nav a:hover {
+        color: var(--accent);
+      }
 
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-        }
+      /* Dark Mode Toggle */
+      .dark-mode-toggle {
+        margin-left: 1.5rem;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
 
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+      }
 
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 34px;
-        }
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
 
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 16px;
-            width: 16px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
+      .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
 
-        input:checked + .toggle-slider {
-            background-color: var(--accent);
-        }
+      .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
 
-        input:checked + .toggle-slider:before {
-            transform: translateX(26px);
-        }
+      input:checked + .toggle-slider {
+        background-color: var(--accent);
+      }
 
-        .toggle-icon {
-            margin-right: 8px;
-            font-size: 18px;
-        }
+      input:checked + .toggle-slider:before {
+        transform: translateX(26px);
+      }
 
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            padding: 5rem 0;
-            margin-top: 0;
-        }
+      .toggle-icon {
+        margin-right: 8px;
+        font-size: 18px;
+      }
 
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
+      .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        padding: 5rem 0;
+        margin-top: 0;
+      }
 
-        .hero .container {
-            position: relative;
-            z-index: 2;
-        }
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+      }
 
+      .hero .container {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: white;
+        letter-spacing: 1px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        color: white;
+      }
+
+      .hero .arabic {
+        font-family: "Amiri", serif;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        direction: rtl;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--accent);
+        color: var(--text-dark);
+        padding: 0.8rem 1.5rem;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn:hover {
+        background-color: #e6a93b;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 2px solid white;
+        color: white;
+        margin-left: 1rem;
+      }
+
+      .btn-outline:hover {
+        background-color: white;
+        color: var(--primary);
+      }
+
+      .section {
+        padding: 6rem 0;
+        position: relative;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+      }
+
+      .section-title h2 {
+        font-size: 2.5rem;
+        display: inline-block;
+        position: relative;
+      }
+
+      .section-title h2:after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        width: 50px;
+        height: 3px;
+        background-color: var(--accent);
+        transform: translateX(-50%);
+      }
+
+      .alphabet-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 1rem;
+      }
+
+      .letter-card {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--card-background-light);
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: var(--shadow);
+        font-family: "Amiri", serif;
+        font-size: 2rem;
+        position: relative;
+      }
+
+      .dark-mode .letter-card {
+        border-color: #333;
+      }
+
+      .letter-card:hover {
+        background-color: var(--primary);
+        color: white;
+        transform: translateY(-3px);
+      }
+
+      .letter-card .transliteration {
+        position: absolute;
+        bottom: 5px;
+        font-size: 0.7rem;
+        font-family: "Poppins", sans-serif;
+      }
+
+      /* Surah Section */
+      .surahs {
+        padding: 6rem 0;
+        background-color: var(--background-light);
+      }
+
+      .surah-selector {
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .surah-selector label {
+        font-weight: 600;
+        margin-right: 1rem;
+      }
+
+      .surah-selector select {
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        font-family: "Poppins", sans-serif;
+        font-size: 1rem;
+        background-color: var(--card-background-light);
+        color: var(--text-dark);
+        border: 1px solid #e0e0e0;
+      }
+
+      .dark-mode .surah-selector select {
+        border-color: #333;
+      }
+
+      /* Surah Content */
+      .surah-content {
+        display: flex;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .surah-arabic,
+      .surah-bangla,
+      .surah-english {
+        flex: 1;
+        background-color: var(--card-background-light);
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+      }
+
+      .surah-arabic {
+        font-family: "Amiri", serif;
+        font-size: 1.5rem;
+        text-align: right;
+        direction: rtl;
+      }
+
+      .surah-bangla,
+      .surah-english {
+        font-family: "Poppins", sans-serif;
+        font-size: 1rem;
+        line-height: 1.8;
+      }
+
+      .verse {
+        margin-bottom: 1.5rem;
+      }
+
+      .verse-number {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        background-color: var(--primary);
+        color: white;
+        border-radius: 50%;
+        margin-right: 10px;
+        font-size: 0.9rem;
+      }
+
+      /* Parallax Divider */
+      .parallax-divider {
+        height: 400px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .parallax-divider-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: -1;
+      }
+
+      .parallax-divider-content {
+        z-index: 2;
+        text-align: center;
+        color: white;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+
+      .parallax-divider-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .parallax-divider-content p {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      footer {
+        background-color: #1a2a3a;
+        color: white;
+        padding: 3rem 0 1.5rem;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .footer-column h3 {
+        margin-bottom: 1.5rem;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h3:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 50px;
+        height: 2px;
+        background-color: var(--accent);
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.8rem;
+      }
+
+      .footer-links a {
+        color: #ccc;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-links a:hover {
+        color: white;
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.9rem;
+        color: #aaa;
+      }
+
+      /* Scroll Animation */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .fade-in.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Loader */
+      .loading {
+        text-align: center;
+        padding: 2rem;
+        color: var(--text-dark);
+      }
+
+      .loading:after {
+        content: "...";
+        animation: dots 1.5s steps(5, end) infinite;
+      }
+
+      @keyframes dots {
+        0%,
+        20% {
+          content: ".";
+        }
+        40% {
+          content: "..";
+        }
+        60%,
+        100% {
+          content: "...";
+        }
+      }
+
+      @media (max-width: 768px) {
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: white;
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+          font-size: 2rem;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            color: white;
-        }
-
-        .hero .arabic {
-            font-family: 'Amiri', serif;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            direction: rtl;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+          font-size: 1rem;
         }
 
         .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--text-dark);
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: #e6a93b;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+          display: block;
+          width: 100%;
+          margin-bottom: 1rem;
         }
 
         .btn-outline {
-            background-color: transparent;
-            border: 2px solid white;
-            color: white;
-            margin-left: 1rem;
-        }
-
-        .btn-outline:hover {
-            background-color: white;
-            color: var(--primary);
-        }
-
-        .section {
-            padding: 6rem 0;
-            position: relative;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            display: inline-block;
-            position: relative;
-        }
-
-        .section-title h2:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            width: 50px;
-            height: 3px;
-            background-color: var(--accent);
-            transform: translateX(-50%);
-        }
-
-        .alphabet-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            gap: 1rem;
-        }
-
-        .letter-card {
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--card-background-light);
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: var(--shadow);
-            font-family: 'Amiri', serif;
-            font-size: 2rem;
-            position: relative;
-        }
-
-        .dark-mode .letter-card {
-            border-color: #333;
-        }
-
-        .letter-card:hover {
-            background-color: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        .letter-card .transliteration {
-            position: absolute;
-            bottom: 5px;
-            font-size: 0.7rem;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* Surah Section */
-        .surahs {
-            padding: 6rem 0;
-            background-color: var(--background-light);
-        }
-
-        .surah-selector {
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .surah-selector label {
-            font-weight: 600;
-            margin-right: 1rem;
-        }
-
-        .surah-selector select {
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            background-color: var(--card-background-light);
-            color: var(--text-dark);
-            border: 1px solid #e0e0e0;
-        }
-
-        .dark-mode .surah-selector select {
-            border-color: #333;
+          margin-left: 0;
         }
 
         .surah-content {
-            display: flex;
-            gap: 2rem;
-            margin-top: 2rem;
+          flex-direction: column;
         }
 
-        .surah-arabic, .surah-bangla {
-            flex: 1;
-            background-color: var(--card-background-light);
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-        }
-
-        .surah-arabic {
-            font-family: 'Amiri', serif;
-            font-size: 1.5rem;
-            text-align: right;
-            direction: rtl;
-        }
-
-        .surah-bangla {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-
-        .verse {
-            margin-bottom: 1.5rem;
-        }
-
-        .verse-number {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
-            text-align: center;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 50%;
-            margin-right: 10px;
-            font-size: 0.9rem;
-        }
-
-        /* Parallax Divider */
         .parallax-divider {
-            height: 400px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .parallax-divider-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            z-index: -1;
-        }
-
-        .parallax-divider-content {
-            z-index: 2;
-            text-align: center;
-            color: white;
-            max-width: 800px;
-            padding: 0 20px;
+          height: 300px;
         }
 
         .parallax-divider-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+          font-size: 1.8rem;
         }
 
         .parallax-divider-content p {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+          font-size: 1rem;
         }
+      }
 
-        footer {
-            background-color: #1a2a3a;
-            color: white;
-            padding: 3rem 0 1.5rem;
-        }
+      /* Prayer Times Section */
+      .prayer-times-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        text-align: center;
+      }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
+      .prayer-time-card {
+        background-color: var(--card-background-light);
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
 
-        .footer-column h3 {
-            margin-bottom: 1.5rem;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 10px;
-        }
+      .prayer-time-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
 
-        .footer-column h3:after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 50px;
-            height: 2px;
-            background-color: var(--accent);
-        }
+      .prayer-time-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary);
+      }
 
-        .footer-links {
-            list-style: none;
-        }
+      .prayer-time-card p {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-dark);
+      }
 
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-
-        /* Scroll Animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Loader */
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-dark);
-        }
-
-        .loading:after {
-            content: "...";
-            animation: dots 1.5s steps(5, end) infinite;
-        }
-
-        @keyframes dots {
-            0%, 20% { content: "."; }
-            40% { content: ".."; }
-            60%, 100% { content: "..."; }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .btn {
-                display: block;
-                width: 100%;
-                margin-bottom: 1rem;
-            }
-
-            .btn-outline {
-                margin-left: 0;
-            }
-
-            .surah-content {
-                flex-direction: column;
-            }
-
-            .parallax-divider {
-                height: 300px;
-            }
-
-            .parallax-divider-content h2 {
-                font-size: 1.8rem;
-            }
-
-            .parallax-divider-content p {
-                font-size: 1rem;
-            }
-        }
+      #current-waqt {
+        color: var(--primary);
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header -->
     <header>
-        <div class="container header-container">
-            <div class="logo">
-                <div class="logo-icon">ن</div>
-                <span>Noor</span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#alphabet">Arabic Alphabet</a></li>
-                    <li><a href="#surahs">Surahs</a></li>
-                </ul>
-                <div class="dark-mode-toggle">
-                    <span class="toggle-icon">☀️</span>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="dark-mode-toggle">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-            </nav>
+      <div class="container header-container">
+        <div class="logo">
+          <div class="logo-icon">ن</div>
+          <span>Noor</span>
         </div>
+        <nav>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#alphabet">Arabic Alphabet</a></li>
+            <li><a href="#surahs">Surahs</a></li>
+          </ul>
+          <div class="dark-mode-toggle">
+            <span class="toggle-icon">☀️</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="dark-mode-toggle" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </nav>
+      </div>
     </header>
 
     <!-- Hero Section -->
     <section id="home" class="hero parallax-container">
-        <div class="parallax-bg" style="background-image: url('https://via.placeholder.com/1920x1080');"></div>
-        <div class="hero-overlay"></div>
-        <div class="container parallax-content">
-            <h1>Learn Quran Online</h1>
-            <p class="arabic">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</p>
-            <p>Begin your journey to learn the Holy Quran with step-by-step lessons, interactive exercises, and authentic resources.</p>
-            <div class="hero-buttons">
-                <a href="#alphabet" class="btn">Start Learning</a>
-                <a href="#surahs" class="btn btn-outline">Learn More</a>
-            </div>
+      <div
+        class="parallax-bg"
+        style="background-image: url('banner.png')"
+      ></div>
+      <div class="hero-overlay"></div>
+      <div class="container parallax-content">
+        <h1>Learn Quran Online</h1>
+        <p class="arabic">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</p>
+        <p>
+          Begin your journey to learn the Holy Quran with step-by-step lessons,
+          interactive exercises, and authentic resources.
+        </p>
+        <div class="hero-buttons">
+          <a href="#lessons" class="btn">Start Learning</a>
+          <a href="#about" class="btn btn-outline">Learn More</a>
         </div>
+      </div>
+    </section>
+
+    <!-- Parallax Divider 1 -->
+    <div class="parallax-divider">
+      <div
+        class="parallax-divider-bg"
+        style="background-image: url('banner2.png')"
+      ></div>
+      <div class="hero-overlay"></div>
+      <div class="parallax-divider-content">
+        <h2>Begin Your Quranic Journey</h2>
+        <p>
+          Learn the beautiful words of the Quran with our interactive lessons
+          and authentic resources.
+        </p>
+      </div>
+    </div>
+
+    <!-- Prayer Times Section -->
+    <section id="prayer-times" class="section fade-in">
+      <div class="container">
+        <div class="section-title">
+          <h2>Prayer Times (Waqt)</h2>
+        </div>
+        <p style="text-align: center; margin-bottom: 2rem">
+          Today's prayer times for your location
+        </p>
+        <div class="prayer-times-grid" id="prayer-times-grid">
+          <div class="loading">Loading prayer times...</div>
+        </div>
+        <div
+          id="current-waqt"
+          style="
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+          "
+        >
+          <div class="loading">Checking current prayer time...</div>
+        </div>
+      </div>
     </section>
 
     <!-- Arabic Alphabet Section -->
     <section id="alphabet" class="section fade-in">
-        <div class="container" style="direction: rtl;">
-            <div class="section-title">
-                <h2>Arabic Alphabet</h2>
-            </div>
-            <p style="text-align: center; margin-bottom: 2rem;">Click on each letter to hear its pronunciation</p>
-            <div class="alphabet-grid">
-                <div class="letter-card" onclick="playLetter('ا')">
-                    ا
-                    <span class="transliteration">Alif</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ب')">
-                    ب
-                    <span class="transliteration">Ba</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ت')">
-                    ت
-                    <span class="transliteration">Ta</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ث')">
-                    ث
-                    <span class="transliteration">Tha</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ج')">
-                    ج
-                    <span class="transliteration">Jeem</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ح')">
-                    ح
-                    <span class="transliteration">Ha</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('خ')">
-                    خ
-                    <span class="transliteration">Kha</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('د')">
-                    د
-                    <span class="transliteration">Dal</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ذ')">
-                    ذ
-                    <span class="transliteration">Dhal</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ر')">
-                    ر
-                    <span class="transliteration">Ra</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ز')">
-                    ز
-                    <span class="transliteration">Za</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('س')">
-                    س
-                    <span class="transliteration">Seen</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ش')">
-                    ش
-                    <span class="transliteration">Sheen</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ص')">
-                    ص
-                    <span class="transliteration">Sad</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ض')">
-                    ض
-                    <span class="transliteration">Dad</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ط')">
-                    ط
-                    <span class="transliteration">Ta</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ظ')">
-                    ظ
-                    <span class="transliteration">Dha</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ع')">
-                    ع
-                    <span class="transliteration">Ayn</span>
-                </div>
-                <div class="letter-card mb-2" onclick="playLetter('غ')">
-                    غ
-                    <span class="transliteration">Ghayn</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ف')">
-                    ف
-                    <span class="transliteration">Fa</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ق')">
-                    ق
-                    <span class="transliteration">Qaf</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ك')">
-                    ك
-                    <span class="transliteration">Kaf</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ل')">
-                    ل
-                    <span class="transliteration">Lam</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('م')">
-                    م
-                    <span class="transliteration">Meem</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ن')">
-                    ن
-                    <span class="transliteration">Noon</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ه')">
-                    ه
-                    <span class="transliteration">Ha</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('و')">
-                    و
-                    <span class="transliteration">Waw</span>
-                </div>
-                <div class="letter-card" onclick="playLetter('ي')">
-                    ي
-                    <span class="transliteration">Ya</span>
-                </div>
-            </div>
+      <div class="container" style="direction: rtl">
+        <div class="section-title">
+          <h2>Arabic Alphabet</h2>
         </div>
+        <p style="text-align: center; margin-bottom: 2rem">
+          Click on each letter to hear its pronunciation
+        </p>
+        <div class="alphabet-grid">
+          <div class="letter-card" onclick="playLetter('ا')">
+            ا
+            <span class="transliteration">Alif</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ب')">
+            ب
+            <span class="transliteration">Ba</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ت')">
+            ت
+            <span class="transliteration">Ta</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ث')">
+            ث
+            <span class="transliteration">Tha</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ج')">
+            ج
+            <span class="transliteration">Jeem</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ح')">
+            ح
+            <span class="transliteration">Ha</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('خ')">
+            خ
+            <span class="transliteration">Kha</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('د')">
+            د
+            <span class="transliteration">Dal</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ذ')">
+            ذ
+            <span class="transliteration">Dhal</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ر')">
+            ر
+            <span class="transliteration">Ra</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ز')">
+            ز
+            <span class="transliteration">Za</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('س')">
+            س
+            <span class="transliteration">Seen</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ش')">
+            ش
+            <span class="transliteration">Sheen</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ص')">
+            ص
+            <span class="transliteration">Sad</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ض')">
+            ض
+            <span class="transliteration">Dad</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ط')">
+            ط
+            <span class="transliteration">Ta</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ظ')">
+            ظ
+            <span class="transliteration">Dha</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ع')">
+            ع
+            <span class="transliteration">Ayn</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('غ')">
+            غ
+            <span class="transliteration">Ghayn</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ف')">
+            ف
+            <span class="transliteration">Fa</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ق')">
+            ق
+            <span class="transliteration">Qaf</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ك')">
+            ك
+            <span class="transliteration">Kaf</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ل')">
+            ل
+            <span class="transliteration">Lam</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('م')">
+            م
+            <span class="transliteration">Meem</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ن')">
+            ن
+            <span class="transliteration">Noon</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ه')">
+            ه
+            <span class="transliteration">Ha</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('و')">
+            و
+            <span class="transliteration">Waw</span>
+          </div>
+          <div class="letter-card" onclick="playLetter('ي')">
+            ي
+            <span class="transliteration">Ya</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="zabar" class="section fade-in">
+      <div class="container" style="direction: rtl">
+        <div class="section-title">
+          <h2>Zabar (ـَ)</h2>
+        </div>
+        <p style="text-align: center; margin-bottom: 2rem">
+          Click on each letter to hear its pronunciation with Zabar
+        </p>
+        <div class="alphabet-grid">
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('اَ', 'Alif with Zabar Ah')"
+          >
+            اَ
+            <span class="transliteration">Ah</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('بَ', 'Ba with Zabar Ba')"
+          >
+            بَ
+            <span class="transliteration">Ba</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('تَ', 'Ta with Zabar Ta')"
+          >
+            تَ
+            <span class="transliteration">Ta</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('ثَ', 'Tha with Zabar Tha')"
+          >
+            ثَ
+            <span class="transliteration">Tha</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('جَ', 'Jeem with Zabar Ja')"
+          >
+            جَ
+            <span class="transliteration"> Ja</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('حَ', 'Ha with Zabar Ha')"
+          >
+            حَ
+            <span class="transliteration">Ha</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('خَ', 'Kha with Zabar Kha')"
+          >
+            خَ
+            <span class="transliteration">Kha</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('دَ', 'Dal with Zabar Da')"
+          >
+            دَ
+            <span class="transliteration">Da</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('ذَ', 'Dhal with Zabar Dha')"
+          >
+            ذَ
+            <span class="transliteration">Dha</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('رَ', 'Ra with Zabar Ra')"
+          >
+            رَ
+            <span class="transliteration">Ra</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('زَ', 'Za with Zabar Za')"
+          >
+            زَ
+            <span class="transliteration">Za</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('سَ', 'Seen with Zabar Sa')"
+          >
+            سَ
+            <span class="transliteration">Sa</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('شَ', 'Sheen with Zabar Sha')"
+          >
+            شَ
+            <span class="transliteration">Sha</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('صَ', 'Sad with Zabar Sa')"
+          >
+            صَ
+            <span class="transliteration">Sa</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('ضَ', 'Dad with Zabar Da')"
+          >
+            ضَ
+            <span class="transliteration">Da</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('طَ', 'Ta with Zabar Ta')"
+          >
+            طَ
+            <span class="transliteration">Ta</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('ظَ', 'Dha with Zabar Za')"
+          >
+            ظَ
+            <span class="transliteration">Za</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('عَ', 'Ayn with Zabar Ayn')"
+          >
+            عَ
+            <span class="transliteration">Ayn</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('غَ', 'Ghayn with Zabar Gha')"
+          >
+            غَ
+            <span class="transliteration">Gha</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('فَ', 'Fa with Zabar Fa')"
+          >
+            فَ
+            <span class="transliteration">Fa</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('قَ', 'Qaf with Zabar Qa')"
+          >
+            قَ
+            <span class="transliteration">Qa</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('كَ', 'Kaf with Zabar Ka')"
+          >
+            كَ
+            <span class="transliteration">Ka</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('لَ', 'Lam with Zabar La')"
+          >
+            لَ
+            <span class="transliteration">La</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('مَ', 'Meem with Zabar Ma')"
+          >
+            مَ
+            <span class="transliteration">Ma</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('نَ', 'Noon with Zabar Na')"
+          >
+            نَ
+            <span class="transliteration">Na</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('هَ', 'Ha with Zabar Ha')"
+          >
+            هَ
+            <span class="transliteration">Ha</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('وَ', 'Waw with Zabar Wa')"
+          >
+            وَ
+            <span class="transliteration">Wa</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZabar('يَ', 'Ya with Zabar Ya')"
+          >
+            يَ
+            <span class="transliteration">Ya</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="zer" class="section fade-in">
+      <div class="container" style="direction: rtl">
+        <div class="section-title">
+          <h2>Zer (ـِ)</h2>
+        </div>
+        <p style="text-align: center; margin-bottom: 2rem">
+          Click on each letter to hear its pronunciation with Zer
+        </p>
+        <div class="alphabet-grid">
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('اِ', 'Alif with Zer Ih')"
+          >
+            اِ
+            <span class="transliteration">Ih</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('بِ', 'Ba with Zer Bi')"
+          >
+            بِ
+            <span class="transliteration">Bi</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('تِ', 'Ta with Zer Ti')"
+          >
+            تِ
+            <span class="transliteration">Ti</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('ثِ', 'Tha with Zer Thi')"
+          >
+            ثِ
+            <span class="transliteration">Thi</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('جِ', 'Jeem with Zer Ji')"
+          >
+            جِ
+            <span class="transliteration">Ji</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('حِ', 'Ha with Zer Hi')"
+          >
+            حِ
+            <span class="transliteration">Hi</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('خِ', 'Kha with Zer Khi')"
+          >
+            خِ
+            <span class="transliteration">Khi</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('دِ', 'Dal with Zer Di')"
+          >
+            دِ
+            <span class="transliteration">Di</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('ذِ', 'Dhal with Zer Dhi')"
+          >
+            ذِ
+            <span class="transliteration">Dhi</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('رِ', 'Ra with Zer Ri')"
+          >
+            رِ
+            <span class="transliteration">Ri</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('زِ', 'Za with Zer Zi')"
+          >
+            زِ
+            <span class="transliteration">Zi</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('سِ', 'Seen with Zer Si')"
+          >
+            سِ
+            <span class="transliteration">Si</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('شِ', 'Sheen with Zer Shi')"
+          >
+            شِ
+            <span class="transliteration">Shi</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('صِ', 'Sad with Zer Si')"
+          >
+            صِ
+            <span class="transliteration">Si</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('ضِ', 'Dad with Zer Di')"
+          >
+            ضِ
+            <span class="transliteration">Di</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('طِ', 'Ta with Zer Ti')"
+          >
+            طِ
+            <span class="transliteration">Ti</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('ظِ', 'Dha with Zer Zi')"
+          >
+            ظِ
+            <span class="transliteration">Zi</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('عِ', 'Ayn with Zer Ayn')"
+          >
+            عِ
+            <span class="transliteration">Ayn</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('غِ', 'Ghayn with Zer Ghi')"
+          >
+            غِ
+            <span class="transliteration">Ghi</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('فِ', 'Fa with Zer Fi')"
+          >
+            فِ
+            <span class="transliteration">Fi</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('قِ', 'Qaf with Zer Qi')"
+          >
+            قِ
+            <span class="transliteration">Qi</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('كِ', 'Kaf with Zer Ki')"
+          >
+            كِ
+            <span class="transliteration">Ki</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('لِ', 'Lam with Zer Li')"
+          >
+            لِ
+            <span class="transliteration">Li</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('مِ', 'Meem with Zer Mi')"
+          >
+            مِ
+            <span class="transliteration">Mi</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('نِ', 'Noon with Zer Ni')"
+          >
+            نِ
+            <span class="transliteration">Ni</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('هِ', 'Ha with Zer Hi')"
+          >
+            هِ
+            <span class="transliteration">Hi</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('وِ', 'Waw with Zer Wi')"
+          >
+            وَ
+            <span class="transliteration"> Wi</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithZer('يِ', 'Ya with Zer Yi')"
+          >
+            يِ
+            <span class="transliteration">Yi</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pesh" class="section fade-in">
+      <div class="container" style="direction: rtl">
+        <div class="section-title">
+          <h2>Pesh (ـُ)</h2>
+        </div>
+        <p style="text-align: center; margin-bottom: 2rem">
+          Click on each letter to hear its pronunciation with Pesh
+        </p>
+        <div class="alphabet-grid">
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('اُ', 'Alif with Pesh Uh')"
+          >
+            اُ
+            <span class="transliteration">Uh</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('بُ', 'Ba with Pesh Bu')"
+          >
+            بُ
+            <span class="transliteration">Bu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('تُ', 'Ta with Pesh Tu')"
+          >
+            تُ
+            <span class="transliteration">Tu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('ثُ', 'Tha with Pesh Thu')"
+          >
+            ثُ
+            <span class="transliteration">Thu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('جُ', 'Jeem with Pesh Ju')"
+          >
+            جُ
+            <span class="transliteration">Ju</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('حُ', 'Ha with Pesh Hu')"
+          >
+            حُ
+            <span class="transliteration">Hu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('خُ', 'Kha with Pesh Khu')"
+          >
+            خُ
+            <span class="transliteration">Khu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('دُ', 'Dal with Pesh Du')"
+          >
+            دُ
+            <span class="transliteration">Du</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('ذُ', 'Dhal with Pesh Dhu')"
+          >
+            ذُ
+            <span class="transliteration">Dhu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('رُ', 'Ra with Pesh Ru')"
+          >
+            رُ
+            <span class="transliteration">Ru</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('زُ', 'Za with Pesh Zu')"
+          >
+            زُ
+            <span class="transliteration">Zu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('سُ', 'Seen with Pesh Su')"
+          >
+            سُ
+            <span class="transliteration">Su</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('شُ', 'Sheen with Pesh Shu')"
+          >
+            شُ
+            <span class="transliteration">Shu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('صُ', 'Sad with Pesh Su')"
+          >
+            صُ
+            <span class="transliteration">Su</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('ضُ', 'Dad with Pesh Du')"
+          >
+            ضُ
+            <span class="transliteration">Du</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('طُ', 'Ta with Pesh Tu')"
+          >
+            طُ
+            <span class="transliteration">Tu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('ظُ', 'Dha with Pesh Zu')"
+          >
+            ظُ
+            <span class="transliteration">Zu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('عُ', 'Ayn with Pesh Ayn')"
+          >
+            عُ
+            <span class="transliteration">Ayn</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('غُ', 'Ghayn with Pesh Ghu')"
+          >
+            غُ
+            <span class="transliteration">Ghu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('فُ', 'Fa with Pesh Fu')"
+          >
+            فُ
+            <span class="transliteration">Fu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('قُ', 'Qaf with Pesh Qu')"
+          >
+            قُ
+            <span class="transliteration">Qu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('كُ', 'Kaf with Pesh Ku')"
+          >
+            كُ
+            <span class="transliteration">Ku</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('لُ', 'Lam with Pesh Lu')"
+          >
+            لُ
+            <span class="transliteration">Lu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('مُ', 'Meem with Pesh Mu')"
+          >
+            مُ
+            <span class="transliteration">Mu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('نُ', 'Noon with Pesh Nu')"
+          >
+            نُ
+            <span class="transliteration">Nu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('هُ', 'Ha with Pesh Hu')"
+          >
+            هُ
+            <span class="transliteration">Hu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('وُ', 'Waw with Pesh Wu')"
+          >
+            وُ
+            <span class="transliteration">Wu</span>
+          </div>
+          <div
+            class="letter-card"
+            onclick="playLetterWithPesh('يُ', 'Ya with Pesh Yu')"
+          >
+            يُ
+            <span class="transliteration">Yu</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Parallax Divider 2 -->
     <div class="parallax-divider">
-        <div class="parallax-divider-bg" style="background-image: url('https://via.placeholder.com/1920x1080'); background-position: center bottom;"></div>
-        <div class="hero-overlay"></div>
-        <div class="parallax-divider-content">
-            <h2>Explore the Quran</h2>
-            <p>Access all 114 Surahs with translations to deepen your understanding of the divine message.</p>
-        </div>
+      <div
+        class="parallax-divider-bg"
+        style="
+          background-image: url('https://via.placeholder.com/1920x1080');
+          background-position: center bottom;
+        "
+      ></div>
+      <div class="hero-overlay"></div>
+      <div class="parallax-divider-content">
+        <h2>Explore the Quran</h2>
+        <p>
+          Access all 114 Surahs with translations to deepen your understanding
+          of the divine message.
+        </p>
+      </div>
     </div>
 
     <!-- Surah Section -->
     <section id="surahs" class="surahs fade-in">
-        <div class="container">
-            <div class="section-title">
-                <h2>All Surahs with Bangla Tarjama</h2>
-            </div>
-            <div class="surah-selector">
-                <label for="surah-select">Select Surah:</label>
-                <select id="surah-select">
-                    <option value="">Loading Surahs...</option>
-                </select>
-            </div>
-            <div class="surah-content">
-                <div class="surah-arabic" id="surah-arabic">
-                    <div class="loading">Loading Arabic text</div>
-                </div>
-                <div class="surah-bangla" id="surah-bangla">
-                    <div class="loading">Loading Bangla translation</div>
-                </div>
-            </div>
+      <div class="container">
+        <div class="section-title">
+          <h2>All Surahs with Bangla and English Tarjama</h2>
         </div>
+        <div class="surah-selector">
+          <label for="surah-select">Select Surah:</label>
+          <select id="surah-select">
+            <option value="">Loading Surahs...</option>
+          </select>
+        </div>
+        <div class="surah-content">
+          <div class="surah-arabic" id="surah-arabic">
+            <div class="loading">Loading Arabic text</div>
+          </div>
+          <div class="surah-bangla" id="surah-bangla">
+            <div class="loading">Loading Bangla translation</div>
+          </div>
+          <div class="surah-english" id="surah-english">
+            <div class="loading">Loading English translation</div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>About Noor</h3>
-                    <p>Noor is an online platform dedicated to helping you learn the Quran with ease and confidence.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#alphabet">Arabic Alphabet</a></li>
-                        <li><a href="#surahs">Surahs</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <ul class="footer-links">
-                        <li><a href="mailto:info@noor.com">info@noor.com</a></li>
-                        <li><a href="tel:+123456789">+123 456 789</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; 2023 Noor. All rights reserved.
-            </div>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>About Noor</h3>
+            <p>
+              Noor is an online platform dedicated to helping you learn the
+              Quran with ease and confidence.
+            </p>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#alphabet">Arabic Alphabet</a></li>
+              <li><a href="#surahs">Surahs</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contact Us</h3>
+            <ul class="footer-links">
+              <li><a href="mailto:info@noor.com">info@noor.com</a></li>
+              <li><a href="tel:+123456789">+123 456 789</a></li>
+            </ul>
+          </div>
         </div>
+        <div class="copyright">&copy; 2023 Noor. All rights reserved.</div>
+      </div>
     </footer>
 
     <!-- Scripts -->
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=dath0RDr"></script>
     <script>
-        // Dark Mode Toggle
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        const body = document.body;
-        const toggleIcon = document.querySelector('.toggle-icon');
+      // Dark Mode Toggle
+      const darkModeToggle = document.getElementById("dark-mode-toggle");
+      const body = document.body;
+      const toggleIcon = document.querySelector(".toggle-icon");
 
-        // Check for saved dark mode preference
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            body.classList.add('dark-mode');
-            darkModeToggle.checked = true;
-            toggleIcon.textContent = '🌙';
+      // Check for saved dark mode preference
+      if (localStorage.getItem("darkMode") === "enabled") {
+        body.classList.add("dark-mode");
+        darkModeToggle.checked = true;
+        toggleIcon.textContent = "🌙";
+      }
+
+      // Dark mode toggle event listener
+      darkModeToggle.addEventListener("change", () => {
+        if (darkModeToggle.checked) {
+          body.classList.add("dark-mode");
+          localStorage.setItem("darkMode", "enabled");
+          toggleIcon.textContent = "🌙";
+        } else {
+          body.classList.remove("dark-mode");
+          localStorage.setItem("darkMode", "disabled");
+          toggleIcon.textContent = "☀️";
         }
+      });
 
-        // Dark mode toggle event listener
-        darkModeToggle.addEventListener('change', () => {
-            if (darkModeToggle.checked) {
-                body.classList.add('dark-mode');
-                localStorage.setItem('darkMode', 'enabled');
-                toggleIcon.textContent = '🌙';
-            } else {
-                body.classList.remove('dark-mode');
-                localStorage.setItem('darkMode', 'disabled');
-                toggleIcon.textContent = '☀️';
-            }
+      // Parallax Scrolling Effect
+      window.addEventListener("scroll", function () {
+        const parallaxElements = document.querySelectorAll(".parallax-bg");
+        let scrollPosition = window.pageYOffset;
+
+        parallaxElements.forEach((element) => {
+          let speed = 0.5;
+          element.style.transform =
+            "translateY(" + scrollPosition * speed + "px)";
+        });
+      });
+
+      // Scroll Animation
+      const fadeElements = document.querySelectorAll(".fade-in");
+
+      function checkFade() {
+        const triggerBottom = window.innerHeight * 0.8;
+
+        fadeElements.forEach((element) => {
+          const elementTop = element.getBoundingClientRect().top;
+
+          if (elementTop < triggerBottom) {
+            element.classList.add("active");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", checkFade);
+      window.addEventListener("load", checkFade);
+
+      // Function to play Arabic letter pronunciation
+      function playLetter(letter) {
+        responsiveVoice.speak(letter, "Arabic Male");
+      }
+
+      // Function to play letter with Zabar
+      function playLetterWithZabar(letter, pronunciation) {
+        responsiveVoice.speak(pronunciation, "Arabic Male");
+      }
+
+      // Function to play letter with Zer
+      function playLetterWithZer(letter, pronunciation) {
+        responsiveVoice.speak(pronunciation, "Arabic Male");
+      }
+
+      // Function to play letter with Pesh
+      function playLetterWithPesh(letter, pronunciation) {
+        responsiveVoice.speak(pronunciation, "Arabic Male");
+      }
+
+      // Function to fetch and display Surah data
+      async function fetchSurah(surahNumber) {
+        try {
+          const surahArabic = document.getElementById("surah-arabic");
+          const surahBangla = document.getElementById("surah-bangla");
+          const surahEnglish = document.getElementById("surah-english");
+
+          // Show loading messages
+          surahArabic.innerHTML =
+            '<div class="loading">Loading Arabic text</div>';
+          surahBangla.innerHTML =
+            '<div class="loading">Loading Bangla translation</div>';
+          surahEnglish.innerHTML =
+            '<div class="loading">Loading English translation</div>';
+
+          // Fetch Arabic text
+          const arabicResponse = await fetch(
+            `https://api.alquran.cloud/v1/surah/${surahNumber}/ar.alafasy`
+          );
+          const arabicData = await arabicResponse.json();
+
+          // Fetch Bangla translation
+          const banglaResponse = await fetch(
+            `https://api.alquran.cloud/v1/surah/${surahNumber}/bn.bengali`
+          );
+          const banglaData = await banglaResponse.json();
+
+          // Fetch English translation
+          const englishResponse = await fetch(
+            `https://api.alquran.cloud/v1/surah/${surahNumber}/en.ahmedali`
+          );
+          const englishData = await englishResponse.json();
+
+          // Generate Arabic content
+          let arabicContent = "";
+          arabicData.data.ayahs.forEach((ayah) => {
+            arabicContent += `
+                <div class="verse">
+                    <span class="verse-number">${ayah.numberInSurah}</span>
+                    ${ayah.text}
+                </div>
+            `;
+          });
+
+          // Generate Bangla content
+          let banglaContent = "";
+          banglaData.data.ayahs.forEach((ayah) => {
+            banglaContent += `
+                <div class="verse">
+                    <span class="verse-number">${ayah.numberInSurah}</span>
+                    ${ayah.text}
+                </div>
+            `;
+          });
+
+          // Generate English content
+          let englishContent = "";
+          englishData.data.ayahs.forEach((ayah) => {
+            englishContent += `
+                <div class="verse">
+                    <span class="verse-number">${ayah.numberInSurah}</span>
+                    ${ayah.text}
+                </div>
+            `;
+          });
+
+          // Update the DOM
+          surahArabic.innerHTML = arabicContent;
+          surahBangla.innerHTML = banglaContent;
+          surahEnglish.innerHTML = englishContent;
+        } catch (error) {
+          console.error("Error fetching Surah data:", error);
+          surahArabic.innerHTML =
+            '<div class="error">Failed to load Arabic text</div>';
+          surahBangla.innerHTML =
+            '<div class="error">Failed to load Bangla translation</div>';
+          surahEnglish.innerHTML =
+            '<div class="error">Failed to load English translation</div>';
+        }
+      }
+
+      // Populate Surah Selector
+      async function populateSurahSelector() {
+        const surahSelect = document.getElementById("surah-select");
+        try {
+          const response = await fetch("https://api.alquran.cloud/v1/surah");
+          const data = await response.json();
+          surahSelect.innerHTML = '<option value="">Select a Surah</option>';
+          data.data.forEach((surah) => {
+            const option = document.createElement("option");
+            option.value = surah.number;
+            option.textContent = `${surah.number}. ${surah.englishName} (${surah.name})`;
+            surahSelect.appendChild(option);
+          });
+        } catch (error) {
+          console.error("Error fetching Surah list:", error);
+          surahSelect.innerHTML =
+            '<option value="">Failed to load Surahs</option>';
+        }
+      }
+
+      // Event listener for Surah selection
+      document
+        .getElementById("surah-select")
+        .addEventListener("change", function () {
+          const surahNumber = this.value;
+          if (surahNumber) {
+            fetchSurah(surahNumber);
+          }
         });
 
-        // Parallax Scrolling Effect
-        window.addEventListener('scroll', function() {
-            const parallaxElements = document.querySelectorAll('.parallax-bg');
-            let scrollPosition = window.pageYOffset;
-            
-            parallaxElements.forEach(element => {
-                let speed = 0.5;
-                element.style.transform = 'translateY(' + scrollPosition * speed + 'px)';
-            });
-        });
-
-        // Scroll Animation
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        function checkFade() {
-            const triggerBottom = window.innerHeight * 0.8;
-            
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                
-                if (elementTop < triggerBottom) {
-                    element.classList.add('active');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', checkFade);
-        window.addEventListener('load', checkFade);
-
-        // Function to play Arabic letter pronunciation
-        function playLetter(letter) {
-            responsiveVoice.speak(letter, "Arabic Male");
-        }
-
-        // Function to fetch and display Surah data
-        async function fetchSurah(surahNumber) {
-            try {
-                const surahArabic = document.getElementById('surah-arabic');
-                const surahBangla = document.getElementById('surah-bangla');
-                surahArabic.innerHTML = '<div class="loading">Loading Arabic text</div>';
-                surahBangla.innerHTML = '<div class="loading">Loading Bangla translation</div>';
-
-                // Fetch Arabic text
-                const arabicResponse = await fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}/ar.alafasy`);
-                const arabicData = await arabicResponse.json();
-
-                // Fetch Bangla translation
-                const banglaResponse = await fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}/bn.bengali`);
-                const banglaData = await banglaResponse.json();
-
-                // Generate Arabic content
-                let arabicContent = '';
-                arabicData.data.ayahs.forEach(ayah => {
-                    arabicContent += `
-                        <div class="verse">
-                            <span class="verse-number">${ayah.numberInSurah}</span>
-                            ${ayah.text}
-                        </div>
-                    `;
-                });
-
-                // Generate Bangla content
-                let banglaContent = '';
-                banglaData.data.ayahs.forEach(ayah => {
-                    banglaContent += `
-                        <div class="verse">
-                            <span class="verse-number">${ayah.numberInSurah}</span>
-                            ${ayah.text}
-                        </div>
-                    `;
-                });
-
-                // Update the DOM
-                surahArabic.innerHTML = arabicContent;
-                surahBangla.innerHTML = banglaContent;
-            } catch (error) {
-                console.error('Error fetching Surah data:', error);
-                surahArabic.innerHTML = '<div class="error">Failed to load Arabic text</div>';
-                surahBangla.innerHTML = '<div class="error">Failed to load Bangla translation</div>';
-            }
-        }
-
-        // Populate Surah Selector
-        async function populateSurahSelector() {
-            const surahSelect = document.getElementById('surah-select');
-            try {
-                const response = await fetch('https://api.alquran.cloud/v1/surah');
-                const data = await response.json();
-                surahSelect.innerHTML = '<option value="">Select a Surah</option>';
-                data.data.forEach(surah => {
-                    const option = document.createElement('option');
-                    option.value = surah.number;
-                    option.textContent = `${surah.number}. ${surah.englishName} (${surah.name})`;
-                    surahSelect.appendChild(option);
-                });
-            } catch (error) {
-                console.error('Error fetching Surah list:', error);
-                surahSelect.innerHTML = '<option value="">Failed to load Surahs</option>';
-            }
-        }
-
-        // Event listener for Surah selection
-        document.getElementById('surah-select').addEventListener('change', function() {
-            const surahNumber = this.value;
-            if (surahNumber) {
-                fetchSurah(surahNumber);
-            }
-        });
-
-        // Initialize the page
-        populateSurahSelector();
+      // Initialize the page
+      populateSurahSelector();
     </script>
-</body>
+
+    <script>
+      // Function to fetch and display prayer times
+      async function fetchPrayerTimes() {
+        const prayerTimesGrid = document.getElementById("prayer-times-grid");
+        const currentWaqtElement = document.getElementById("current-waqt");
+
+        try {
+          // Get user's location (latitude and longitude)
+          const position = await new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject);
+          });
+
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          // Fetch prayer times from Aladhan API
+          const response = await fetch(
+            `https://api.aladhan.com/v1/timings/${
+              new Date().toISOString().split("T")[0]
+            }?latitude=${latitude}&longitude=${longitude}&method=2`
+          );
+          const data = await response.json();
+
+          // Extract prayer times
+          const timings = data.data.timings;
+
+          // Clear loading message
+          prayerTimesGrid.innerHTML = "";
+
+          // Display prayer times
+          const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+          prayers.forEach((prayer) => {
+            const prayerTimeCard = document.createElement("div");
+            prayerTimeCard.classList.add("prayer-time-card");
+            prayerTimeCard.innerHTML = `
+                <h3>${prayer}</h3>
+                <p>${timings[prayer]}</p>
+                <small>${getPrayerRange(prayer, timings)}</small>
+            `;
+            prayerTimesGrid.appendChild(prayerTimeCard);
+          });
+
+          // Display current Waqt
+          const currentWaqt = getCurrentWaqt(timings);
+          currentWaqtElement.innerHTML = `Current Prayer Time: <strong>${currentWaqt}</strong>`;
+        } catch (error) {
+          console.error("Error fetching prayer times:", error);
+          prayerTimesGrid.innerHTML =
+            '<div class="error">Failed to load prayer times. Please try again later.</div>';
+          currentWaqtElement.innerHTML =
+            '<div class="error">Failed to check current prayer time.</div>';
+        }
+      }
+
+      // Function to get the start and end range of a prayer
+      function getPrayerRange(prayer, timings) {
+        const prayerOrder = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+        const currentIndex = prayerOrder.indexOf(prayer);
+
+        if (currentIndex === -1 || currentIndex === prayerOrder.length - 1) {
+          return "Until next prayer";
+        }
+
+        const nextPrayer = prayerOrder[currentIndex + 1];
+        return `${timings[prayer]} - ${timings[nextPrayer]}`;
+      }
+
+      // Function to get the current Waqt
+      function getCurrentWaqt(timings) {
+        const now = new Date();
+        const currentTime = now.getHours() * 60 + now.getMinutes(); // Convert to minutes
+
+        const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+        for (let i = 0; i < prayers.length; i++) {
+          const prayer = prayers[i];
+          const prayerTime = timings[prayer];
+          const [hours, minutes] = prayerTime.split(":").map(Number);
+          const prayerTimeInMinutes = hours * 60 + minutes;
+
+          const nextPrayer = prayers[i + 1];
+          let nextPrayerTimeInMinutes;
+          if (nextPrayer) {
+            const [nextHours, nextMinutes] = timings[nextPrayer]
+              .split(":")
+              .map(Number);
+            nextPrayerTimeInMinutes = nextHours * 60 + nextMinutes;
+          } else {
+            // If it's Isha, the next prayer is Fajr of the next day
+            const [fajrHours, fajrMinutes] = timings["Fajr"]
+              .split(":")
+              .map(Number);
+            nextPrayerTimeInMinutes = fajrHours * 60 + fajrMinutes + 24 * 60; // Add 24 hours
+          }
+
+          if (
+            currentTime >= prayerTimeInMinutes &&
+            currentTime < nextPrayerTimeInMinutes
+          ) {
+            return prayer;
+          }
+        }
+
+        return "No prayer time found";
+      }
+
+      // Initialize prayer times
+      fetchPrayerTimes();
+    </script>
+  </body>
 </html>
