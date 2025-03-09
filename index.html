@@ -745,6 +745,46 @@
         border-radius: 4px;
       }
     </style>
+
+    <style>
+      .hadith-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .hadith-card {
+        background-color: var(--card-background-light);
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .hadith-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .hadith-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary);
+      }
+
+      .hadith-card p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--text-dark);
+      }
+
+      .hadith-card small {
+        display: block;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: var(--text-secondary-dark);
+      }
+    </style>
   </head>
   <body>
     <!-- Header -->
@@ -1228,10 +1268,10 @@
         <div class="alphabet-grid">
           <div
             class="letter-card"
-            onclick="playLetterWithZer('اِ', 'Alif with Zer Ih')"
+            onclick="playLetterWithZer('اِ', 'Alif with Zer Eh')"
           >
             اِ
-            <span class="transliteration">Ih</span>
+            <span class="transliteration">Eh</span>
           </div>
           <div
             class="letter-card"
