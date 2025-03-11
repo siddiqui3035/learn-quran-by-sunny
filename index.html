@@ -1468,144 +1468,147 @@
       populateSurahSelector();
     </script>
 
-    <script>
-      // Function to fetch and display prayer times
-      async function fetchPrayerTimes() {
-        const prayerTimesGrid = document.getElementById("prayer-times-grid");
-        const currentWaqtElement = document.getElementById("current-waqt");
+<script>
+  // Function to fetch and display prayer times
+  async function fetchPrayerTimes() {
+    const prayerTimesGrid = document.getElementById("prayer-times-grid");
+    const currentWaqtElement = document.getElementById("current-waqt");
 
-        try {
-          // Get user's location (latitude and longitude)
-          const position = await new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject);
-          });
+    try {
+      // Get user's location (latitude and longitude)
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
 
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
 
-          // Fetch prayer times from Aladhan API
-          const response = await fetch(
-            `https://api.aladhan.com/v1/timings/${
-              new Date().toISOString().split("T")[0]
-            }?latitude=${latitude}&longitude=${longitude}&method=2`
-          );
-          const data = await response.json();
+      // Fetch prayer times from Aladhan API
+      const response = await fetch(
+        `https://api.aladhan.com/v1/timings/${
+          new Date().toISOString().split("T")[0]
+        }?latitude=${latitude}&longitude=${longitude}&method=2&adjustment=2`
+      );
 
-          // Extract prayer times
-          const timings = data.data.timings;
+      const data = await response.json();
 
-          // Check if the current month is Ramadan
-          const hijriMonth = data.data.date.hijri.month.number;
-          const isRamadan = hijriMonth === 3; // Ramadan is the 9th month in the Hijri calendar
+      // Extract prayer times
+      const timings = data.data.timings;
 
-          console.log("Hijri Month:", hijriMonth); // Debugging: Check Hijri month
-          console.log("API Response:", data); // Debugging: Check API response
+      // Check if the current month is Ramadan
+      const hijriMonthName = data.data.date.hijri.month.en;
+      console.log("Hijri Month Name:", hijriMonthName);
 
-          // Clear loading message
-          prayerTimesGrid.innerHTML = "";
+      const isRamadan = hijriMonth == 4; // Ramadan is the 9th month in the Hijri calendar
 
-          // Display prayer times
-          const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
-          prayers.forEach((prayer) => {
-            const prayerTimeCard = document.createElement("div");
-            prayerTimeCard.classList.add("prayer-time-card");
-            prayerTimeCard.innerHTML = `
-                <h3>${prayer}</h3>
-                <p>${timings[prayer]}</p>
-                <small>${getPrayerRange(prayer, timings)}</small>
-            `;
-            prayerTimesGrid.appendChild(prayerTimeCard);
-          });
+      console.log("Hijri Month:", hijriMonth); // Debugging: Check Hijri month
+      console.log("API Response:", data); // Debugging: Check API response
 
-          // Display Iftar and Suhoor times during Ramadan
-          if (isRamadan) {
-            const iftarTime = timings["Maghrib"]; // Iftar time is Maghrib time
-            const suhoorTime = timings["Fajr"]; // Suhoor time is Fajr time
+      // Clear loading message
+      prayerTimesGrid.innerHTML = "";
 
-            const iftarCard = document.createElement("div");
-            iftarCard.classList.add("prayer-time-card");
-            iftarCard.innerHTML = `
-                <h3>Iftar</h3>
-                <p>${iftarTime}</p>
-                <small>Break fast at sunset</small>
-            `;
-            prayerTimesGrid.appendChild(iftarCard);
+      // Display prayer times
+      const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+      prayers.forEach((prayer) => {
+        const prayerTimeCard = document.createElement("div");
+        prayerTimeCard.classList.add("prayer-time-card");
+        prayerTimeCard.innerHTML = `
+      <h3>${prayer}</h3>
+      <p>${timings[prayer]}</p>
+      <small>${getPrayerRange(prayer, timings)}</small>
+  `;
+        prayerTimesGrid.appendChild(prayerTimeCard);
+      });
 
-            const suhoorCard = document.createElement("div");
-            suhoorCard.classList.add("prayer-time-card");
-            suhoorCard.innerHTML = `
-                <h3>Suhoor</h3>
-                <p>${suhoorTime}</p>
-                <small>Pre-dawn meal before Fajr</small>
-            `;
-            prayerTimesGrid.appendChild(suhoorCard);
-          }
+      // Display Iftar and Suhoor times during Ramadan
+      if (isRamadan) {
+        const iftarTime = timings["Maghrib"]; // Iftar time is Maghrib time
+        const suhoorTime = timings["Fajr"]; // Suhoor time is Fajr time
 
-          // Display current Waqt
-          const currentWaqt = getCurrentWaqt(timings);
-          currentWaqtElement.innerHTML = `Current Prayer Time: <strong>${currentWaqt}</strong>`;
-        } catch (error) {
-          console.error("Error fetching prayer times:", error);
-          prayerTimesGrid.innerHTML =
-            '<div class="error">Failed to load prayer times. Please try again later.</div>';
-          currentWaqtElement.innerHTML =
-            '<div class="error">Failed to check current prayer time.</div>';
-        }
+        const iftarCard = document.createElement("div");
+        iftarCard.classList.add("prayer-time-card");
+        iftarCard.innerHTML = `
+      <h3>Iftar</h3>
+      <p>${iftarTime}</p>
+      <small>Break fast at sunset</small>
+  `;
+        prayerTimesGrid.appendChild(iftarCard);
+
+        const suhoorCard = document.createElement("div");
+        suhoorCard.classList.add("prayer-time-card");
+        suhoorCard.innerHTML = `
+      <h3>Suhoor</h3>
+      <p>${suhoorTime}</p>
+      <small>Pre-dawn meal before Fajr</small>
+  `;
+        prayerTimesGrid.appendChild(suhoorCard);
       }
 
-      // Function to get the start and end range of a prayer
-      function getPrayerRange(prayer, timings) {
-        const prayerOrder = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
-        const currentIndex = prayerOrder.indexOf(prayer);
+      // Display current Waqt
+      const currentWaqt = getCurrentWaqt(timings);
+      currentWaqtElement.innerHTML = `Current Prayer Time: <strong>${currentWaqt}</strong>`;
+    } catch (error) {
+      console.error("Error fetching prayer times:", error);
+      prayerTimesGrid.innerHTML =
+        '<div class="error">Failed to load prayer times. Please try again later.</div>';
+      currentWaqtElement.innerHTML =
+        '<div class="error">Failed to check current prayer time.</div>';
+    }
+  }
 
-        if (currentIndex === -1 || currentIndex === prayerOrder.length - 1) {
-          return "Until next prayer";
-        }
+  // Function to get the start and end range of a prayer
+  function getPrayerRange(prayer, timings) {
+    const prayerOrder = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+    const currentIndex = prayerOrder.indexOf(prayer);
 
-        const nextPrayer = prayerOrder[currentIndex + 1];
-        return `${timings[prayer]} - ${timings[nextPrayer]}`;
+    if (currentIndex === -1 || currentIndex === prayerOrder.length - 1) {
+      return "Until next prayer";
+    }
+
+    const nextPrayer = prayerOrder[currentIndex + 1];
+    return `${timings[prayer]} - ${timings[nextPrayer]}`;
+  }
+
+  // Function to get the current Waqt
+  function getCurrentWaqt(timings) {
+    const now = new Date();
+    const currentTime = now.getHours() * 60 + now.getMinutes(); // Convert to minutes
+
+    const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+    for (let i = 0; i < prayers.length; i++) {
+      const prayer = prayers[i];
+      const prayerTime = timings[prayer];
+      const [hours, minutes] = prayerTime.split(":").map(Number);
+      const prayerTimeInMinutes = hours * 60 + minutes;
+
+      const nextPrayer = prayers[i + 1];
+      let nextPrayerTimeInMinutes;
+      if (nextPrayer) {
+        const [nextHours, nextMinutes] = timings[nextPrayer]
+          .split(":")
+          .map(Number);
+        nextPrayerTimeInMinutes = nextHours * 60 + nextMinutes;
+      } else {
+        // If it's Isha, the next prayer is Fajr of the next day
+        const [fajrHours, fajrMinutes] = timings["Fajr"]
+          .split(":")
+          .map(Number);
+        nextPrayerTimeInMinutes = fajrHours * 60 + fajrMinutes + 24 * 60; // Add 24 hours
       }
 
-      // Function to get the current Waqt
-      function getCurrentWaqt(timings) {
-        const now = new Date();
-        const currentTime = now.getHours() * 60 + now.getMinutes(); // Convert to minutes
-
-        const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
-        for (let i = 0; i < prayers.length; i++) {
-          const prayer = prayers[i];
-          const prayerTime = timings[prayer];
-          const [hours, minutes] = prayerTime.split(":").map(Number);
-          const prayerTimeInMinutes = hours * 60 + minutes;
-
-          const nextPrayer = prayers[i + 1];
-          let nextPrayerTimeInMinutes;
-          if (nextPrayer) {
-            const [nextHours, nextMinutes] = timings[nextPrayer]
-              .split(":")
-              .map(Number);
-            nextPrayerTimeInMinutes = nextHours * 60 + nextMinutes;
-          } else {
-            // If it's Isha, the next prayer is Fajr of the next day
-            const [fajrHours, fajrMinutes] = timings["Fajr"]
-              .split(":")
-              .map(Number);
-            nextPrayerTimeInMinutes = fajrHours * 60 + fajrMinutes + 24 * 60; // Add 24 hours
-          }
-
-          if (
-            currentTime >= prayerTimeInMinutes &&
-            currentTime < nextPrayerTimeInMinutes
-          ) {
-            return prayer;
-          }
-        }
-
-        return "No prayer time found";
+      if (
+        currentTime >= prayerTimeInMinutes &&
+        currentTime < nextPrayerTimeInMinutes
+      ) {
+        return prayer;
       }
+    }
 
-      // Initialize prayer times
-      fetchPrayerTimes();
-    </script>
+    return "No prayer time found";
+  }
+
+  // Initialize prayer times
+  fetchPrayerTimes();
+</script>
   </body>
 </html>
