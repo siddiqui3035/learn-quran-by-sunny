@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="facicon.ico" />
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Calculate moon age and phase online with Taealam alquran. Understand the lunar cycle and its significance."
+    />
+    <meta
+      name="keywords"
+      content="moon age, moon phase calculator, lunar cycle, celestial calculator, taealam alquran"
+    />
+    <meta name="author" content="Taealam alquran" />
+    <meta name="robots" content="index, follow" />
+
+    <title>Moon Age Calculator - Taealam alquran</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&family=Outfit:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      :root {
+        --primary-moon: #2e8b57;
+        --secondary-moon: #1a1a2e;
+        --accent-moon: #f4d03f;
+        --bg-moon: #020205;
+        --glass-moon: rgba(255, 255, 255, 0.03);
+        --glass-border-moon: rgba(255, 255, 255, 0.08);
+      }
+
+      /* Parallax Cosmic Background */
+      .parallax-bg-moon {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: radial-gradient(
+          circle at center,
+          #16213e 0%,
+          #0f3460 30%,
+          #1a1a2e 60%,
+          #020205 100%
+        );
+        transform: scale(1.1);
+      }
+
+      .stars-moon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 200%;
+        background: url("https://www.transparenttextures.com/patterns/stardust.png");
+        opacity: 0.4;
+        animation: drift 60s linear infinite;
+      }
+
+      @keyframes drift {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      .nebula-moon {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 30%,
+            rgba(142, 68, 173, 0.2) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(41, 128, 185, 0.2) 0%,
+            transparent 50%
+          );
+        filter: blur(80px);
+        animation: pulse 10s ease-in-out infinite alternate;
+      }
+
+      @keyframes pulse {
+        from {
+          opacity: 0.5;
+          transform: scale(1);
+        }
+        to {
+          opacity: 0.8;
+          transform: scale(1.1);
+        }
+      }
+
+      /* Container & Layout */
+      .moon-calculator-section {
+        padding: 8rem 1rem 4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+        z-index: 1;
+        position: relative;
+      }
+
+      .moon-container {
+        width: 90%;
+        max-width: 450px;
+        margin-top: 2rem;
+        padding: 2.5rem;
+        background: var(--glass-moon);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border: 1px solid var(--glass-border-moon);
+        border-radius: 32px;
+        text-align: center;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+        animation: reveal 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        color: #fff;
+        font-family: "Outfit", sans-serif;
+      }
+
+      /* Tabs System */
+      .tabs-moon {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 2rem;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 5px;
+        border-radius: 12px;
+        border: 1px solid var(--glass-border-moon);
+      }
+
+      .tab-btn {
+        padding: 0.6rem 1.2rem;
+        border: none;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+      }
+
+      .tab-btn.active {
+        background: var(--primary-moon);
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(46, 139, 87, 0.4);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* World Clock Styles */
+      .clock-grid {
+        display: grid;
+        gap: 1.5rem;
+        margin-top: 1rem;
+      }
+
+      .clock-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--glass-border-moon);
+        border-radius: 20px;
+        padding: 1.5rem;
+        transition: transform 0.3s ease;
+      }
+
+      .clock-card:hover {
+        transform: scale(1.02);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .clock-city {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--primary-moon);
+        margin-bottom: 0.5rem;
+      }
+
+      .clock-time {
+        font-size: 2.2rem;
+        font-weight: 600;
+        font-family: "Outfit", sans-serif;
+        color: #fff;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      }
+
+      .clock-date {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.4);
+        margin-top: 0.5rem;
+      }
+
+      @keyframes reveal {
+        from {
+          opacity: 0;
+          transform: translateY(40px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* Gradient Glowing Title */
+      .moon-container h1 {
+        font-weight: 600;
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(
+          90deg,
+          #fff,
+          #a8e6c1,
+          #ffc045,
+          #a8e6c1,
+          #fff
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 4s linear infinite;
+        text-shadow: 0 0 20px rgba(46, 139, 87, 0.3);
+      }
+
+      @keyframes shine {
+        to {
+          background-position: 200% center;
+        }
+      }
+
+      .tagline-moon {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 2rem;
+        letter-spacing: 1px;
+      }
+
+      /* Interactive Inputs */
+      .input-wrapper-moon {
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+
+      #dateInput {
+        width: 100%;
+        padding: 1.2rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--glass-border-moon);
+        border-radius: 16px;
+        color: #fff;
+        font-family: inherit;
+        font-size: 1rem;
+        outline: none;
+        transition: all 0.4s ease;
+      }
+
+      #dateInput:focus {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: var(--primary-moon);
+        box-shadow: 0 0 20px rgba(46, 139, 87, 0.3);
+      }
+
+      .btn-moon {
+        width: 100%;
+        padding: 1.2rem;
+        border: none;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #2e8b57 0%, #1b5e20 100%);
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .btn-moon:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(46, 139, 87, 0.5);
+      }
+
+      .btn-moon:active {
+        transform: translateY(0);
+      }
+
+      /* Moon & Motion UI */
+      .moon-orbit-container {
+        position: relative;
+        height: 220px;
+        margin: 1.5rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .orbit-path {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border: 1px dashed rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: rotate-orbit 20s linear infinite;
+      }
+
+      @keyframes rotate-orbit {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .small-star {
+        position: absolute;
+        top: -3px;
+        left: 50%;
+        width: 6px;
+        height: 6px;
+        background: var(--accent-moon);
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--accent-moon);
+      }
+
+      .moon-box {
+        position: relative;
+        width: 140px;
+        height: 140px;
+        z-index: 5;
+      }
+
+      .moon-svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
+        transition: transform 0.5s ease;
+        background: transparent; /* Fix for potential non-transparent background */
+      }
+
+      .moon-box:hover .moon-svg {
+        transform: scale(1.05);
+      }
+
+      /* Result Card */
+      .result-pane {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+      }
+
+      .result-pane.active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .age-val {
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+        color: #fff;
+      }
+
+      .phase-label {
+        font-size: 1rem;
+        color: var(--accent-moon);
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        margin-bottom: 1rem;
+      }
+
+      .extra-details {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.4);
+        line-height: 1.5;
+      }
+
+      /* SVG Utilities */
+      .moon-surface {
+        fill: #d5d8dc;
+        filter: url(#moon-texture);
+      }
+      #dynamic-shade {
+        fill: #020205;
+        transition: d 0.6s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container header-container">
+        <div class="logo">
+          <div class="logo-icon">
+            <img src="logo.png" width="100px" alt="Taealam alquran logo" />
+          </div>
+          <!-- <span>Taealam alquran </span> -->
+        </div>
+        <div class="hamburger-menu" id="hamburger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <nav id="nav-menu">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#alphabet">Arabic Alphabet</a></li>
+            <li><a href="index.html#surahs">Surahs</a></li>
+            <li><a href="hijri-calander.html">Hijri Calendar</a></li>
+            <li><a href="moon-age.html">Moon Age</a></li>
+            <li><a href="live-haramain.html">Live Haramain</a></li>
+          </ul>
+          <div class="dark-mode-toggle">
+            <span class="toggle-icon">☀️</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="dark-mode-toggle" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="parallax-bg-moon">
+      <div class="stars-moon"></div>
+      <div class="nebula-moon"></div>
+    </div>
+
+    <section class="moon-calculator-section">
+      <div class="moon-container">
+        <div class="tabs-moon">
+          <button class="tab-btn active" onclick="switchTab('moon-tab')">
+            Moon Age
+          </button>
+          <button class="tab-btn" onclick="switchTab('clock-tab')">
+            World Clock
+          </button>
+        </div>
+
+        <div id="moon-tab" class="tab-content active">
+          <h1>Lunar Vision</h1>
+          <p class="tagline-moon">CALCULATE MOON AGE & PHASE</p>
+
+          <div class="input-wrapper-moon">
+            <input type="date" id="dateInput" />
+          </div>
+          <button class="btn-moon" onclick="revealMoon()">ANALYZE CYCLE</button>
+
+          <div class="moon-orbit-container">
+            <div class="orbit-path">
+              <div class="small-star"></div>
+            </div>
+            <div class="moon-box">
+              <svg viewBox="0 0 100 100" class="moon-svg" id="moonSvg">
+                <defs>
+                  <filter id="moon-texture">
+                    <feTurbulence
+                      type="fractalNoise"
+                      baseFrequency="0.5"
+                      numOctaves="4"
+                      result="noise"
+                    />
+                    <feDiffuseLighting
+                      in="noise"
+                      lighting-color="#fff"
+                      surfaceScale="1.5"
+                      result="light"
+                    >
+                      <feDistantLight azimuth="45" elevation="55" />
+                    </feDiffuseLighting>
+                    <feComposite
+                      in="SourceGraphic"
+                      in2="light"
+                      operator="arithmetic"
+                      k2="0.7"
+                      k3="0.5"
+                      result="textured"
+                    />
+                    <feComposite
+                      in="textured"
+                      in2="SourceGraphic"
+                      operator="in"
+                    />
+                  </filter>
+                </defs>
+                <circle cx="50" cy="50" r="48" fill="rgba(255,255,255,0.02)" />
+                <circle cx="50" cy="50" r="45" class="moon-surface" />
+                <path id="dynamic-shade" d="" />
+              </svg>
+            </div>
+          </div>
+
+          <div id="result" class="result-pane">
+            <div class="age-val" id="ageOut">Day 0.0</div>
+            <div class="phase-label" id="phaseOut">New Moon</div>
+            <div class="extra-details" id="detailsOut"></div>
+          </div>
+        </div>
+
+        <div id="clock-tab" class="tab-content">
+          <h1>World Time</h1>
+          <p class="tagline-moon">GLOBAL LUNAR COORDINATES</p>
+
+          <div class="clock-grid">
+            <div class="clock-card">
+              <div class="clock-city">Bangladesh</div>
+              <div class="clock-time" id="time-bd">00:00:00</div>
+              <div class="clock-date" id="date-bd">Loading...</div>
+            </div>
+            <div class="clock-card">
+              <div class="clock-city">New York</div>
+              <div class="clock-time" id="time-ny">00:00:00</div>
+              <div class="clock-date" id="date-ny">Loading...</div>
+            </div>
+            <div class="clock-card">
+              <div class="clock-city">Saudi Arabia (Riyadh)</div>
+              <div class="clock-time" id="time-sa">00:00:00</div>
+              <div class="clock-date" id="date-sa">Loading...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>About Taealam alquran</h3>
+            <p>
+              Taealam alquran is an online platform dedicated to helping you
+              learn the Quran with ease and confidence.
+            </p>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="index.html#alphabet">Arabic Alphabet</a></li>
+              <li><a href="index.html#surahs">Surahs</a></li>
+              <li><a href="moon-age.html">Moon Age</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contact Us</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="mailto:s.h.siddiqui5830@gmail.com"
+                  >s.h.siddiqui5830@gmail.com</a
+                >
+              </li>
+              <li><a href="tel:+8801677273025">+880 1677273025</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          &copy; 2025 Taealam alquran . All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Toggle Hamburger Menu
+      const hamburgerMenu = document.getElementById("hamburger-menu");
+      const navMenu = document.getElementById("nav-menu");
+
+      hamburgerMenu.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+
+      // Dark Mode Toggle
+      const darkModeToggle = document.getElementById("dark-mode-toggle");
+      const body = document.body;
+      const toggleIcon = document.querySelector(".toggle-icon");
+
+      if (localStorage.getItem("darkMode") === "enabled") {
+        body.classList.add("dark-mode");
+        darkModeToggle.checked = true;
+        toggleIcon.textContent = "🌙";
+      }
+
+      darkModeToggle.addEventListener("change", () => {
+        if (darkModeToggle.checked) {
+          body.classList.add("dark-mode");
+          localStorage.setItem("darkMode", "enabled");
+          toggleIcon.textContent = "🌙";
+        } else {
+          body.classList.remove("dark-mode");
+          localStorage.setItem("darkMode", "disabled");
+          toggleIcon.textContent = "☀️";
+        }
+      });
+
+      // Moon Logic
+      document.getElementById("dateInput").valueAsDate = new Date();
+
+      function getJD(date) {
+        return (
+          date.getTime() / 86400000 -
+          date.getTimezoneOffset() / 1440 +
+          2440587.5
+        );
+      }
+
+      function calcMoon(date) {
+        const jd = getJD(date);
+        const refJD = 2451550.26; // Reference New Moon
+        const cycle = 29.530588853;
+        let age = (jd - refJD) % cycle;
+        if (age < 0) age += cycle;
+        return age;
+      }
+
+      function phaseName(age) {
+        const p = age / 29.530588853;
+        if (p < 0.0625 || p > 0.9375) return "New Moon";
+        if (p < 0.1875) return "Waxing Crescent";
+        if (p < 0.3125) return "First Quarter";
+        if (p < 0.4375) return "Waxing Gibbous";
+        if (p < 0.5625) return "Full Moon";
+        if (p < 0.6875) return "Waning Gibbous";
+        if (p < 0.8125) return "Last Quarter";
+        return "Waning Crescent";
+      }
+
+      function revealMoon() {
+        const val = document.getElementById("dateInput").value;
+        if (!val) return;
+
+        const date = new Date(val);
+        const age = calcMoon(date);
+        const cycle = 29.530588853;
+        const perc = age / cycle;
+
+        document.getElementById("ageOut").textContent = `Day ${age.toFixed(1)}`;
+        document.getElementById("phaseOut").textContent = phaseName(age);
+
+        const illumination = perc <= 0.5 ? perc * 200 : 200 - perc * 200;
+        document.getElementById(
+          "detailsOut"
+        ).innerHTML = `Illumination: ${illumination.toFixed(
+          1
+        )}%<br>Cycle Progress: ${(perc * 100).toFixed(1)}%`;
+
+        document.getElementById("result").classList.add("active");
+
+        updateShade(perc);
+      }
+
+      function updateShade(p) {
+        const r = 45;
+        const shade = document.getElementById("dynamic-shade");
+        let d = "";
+
+        if (p < 0.5) {
+          const sweep = p * 2;
+          const w = r * (1 - sweep * 2);
+          d = `M 50 ${50 - r} A ${r} ${r} 0 0 1 50 ${50 + r} A ${Math.abs(
+            w
+          )} ${r} 0 0 ${w > 0 ? 1 : 0} 50 ${50 - r}`;
+        } else {
+          const sweep = (p - 0.5) * 2;
+          const w = r * (-1 + sweep * 2);
+          d = `M 50 ${50 - r} A ${r} ${r} 0 0 0 50 ${50 + r} A ${Math.abs(
+            w
+          )} ${r} 0 0 ${w > 0 ? 0 : 1} 50 ${50 - r}`;
+        }
+        shade.setAttribute("d", d);
+      }
+
+      window.onload = () => {
+        revealMoon();
+        startClocks();
+      };
+
+      // Tab Switching
+      function switchTab(tabId) {
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((tab) => tab.classList.remove("active"));
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+
+        document.getElementById(tabId).classList.add("active");
+        event.currentTarget.classList.add("active");
+      }
+
+      // World Clock Logic
+      function updateClocks() {
+        const options = {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        };
+
+        const dateOptions = {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+        };
+
+        const zones = [
+          { id: "bd", zone: "Asia/Dhaka" },
+          { id: "ny", zone: "America/New_York" },
+          { id: "sa", zone: "Asia/Riyadh" },
+        ];
+
+        zones.forEach((loc) => {
+          const now = new Date();
+          document.getElementById(`time-${loc.id}`).textContent =
+            now.toLocaleTimeString("en-US", { ...options, timeZone: loc.zone });
+          document.getElementById(`date-${loc.id}`).textContent =
+            now.toLocaleDateString("en-US", {
+              ...dateOptions,
+              timeZone: loc.zone,
+            });
+        });
+      }
+
+      function startClocks() {
+        updateClocks();
+        setInterval(updateClocks, 1000);
+      }
+
+      document.addEventListener("mousemove", (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 20;
+        const y = (e.clientY / window.innerHeight - 0.5) * 20;
+        const bg = document.querySelector(".parallax-bg-moon");
+        if (bg) bg.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
+      });
+    </script>
+  </body>
+</html>

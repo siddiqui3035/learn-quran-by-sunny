@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Haramain - Al-Quran Online</title>
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="facicon.ico" />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&family=Outfit:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      :root {
+        --glass-bg: rgba(255, 255, 255, 0.9);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        --transition: all 0.3s ease;
+      }
+
+      .dark-mode {
+        --glass-bg: rgba(30, 30, 30, 0.8);
+        --glass-border: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Main Content */
+      main {
+        padding-top: 100px;
+        min-height: 100vh;
+      }
+
+      .section {
+        padding: 4rem 0;
+        text-align: center;
+      }
+
+      .section-title {
+        margin-bottom: 3rem;
+      }
+
+      .section-title h1 {
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      /* Video Grid */
+      .video-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        margin-top: 2rem;
+      }
+
+      .video-card {
+        background: var(--card-background-light);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+
+      .video-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .video-container {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+        overflow: hidden;
+      }
+
+      .video-container video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: black;
+      }
+
+      .video-info {
+        padding: 1.5rem;
+      }
+
+      .video-info h3 {
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+
+      /* Tab Switcher for Mobile */
+      .mobile-tabs {
+        display: none;
+        gap: 10px;
+        margin-bottom: 2rem;
+        justify-content: center;
+      }
+
+      .tab-btn {
+        padding: 10px 20px;
+        border: 1px solid var(--primary);
+        background: transparent;
+        color: var(--primary);
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .tab-btn.active {
+        background: var(--primary);
+        color: white;
+      }
+
+      @media (max-width: 900px) {
+        .video-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .mobile-tabs {
+          display: flex;
+        }
+
+        .video-card.hidden-mobile {
+          display: none;
+        }
+      }
+
+      /* Footer adjustments for standard footer */
+      .footer-bottom {
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.9rem;
+        color: #888;
+        margin-top: 2rem;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.8s ease forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container header-container">
+        <div class="logo">
+          <div class="logo-icon">
+            <img src="logo.png" width="100px" alt="" />
+          </div>
+        </div>
+        <!-- Hamburger Menu Icon -->
+        <div class="hamburger-menu" id="hamburger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <!-- Navigation -->
+        <nav id="nav-menu">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#alphabet">Arabic Alphabet</a></li>
+            <li><a href="index.html#surahs">Surahs</a></li>
+            <li><a href="hijri-calander.html">Hijri Calendar</a></li>
+            <li><a href="moon-age.html">Moon Age</a></li>
+            <li>
+              <a href="live-haramain.html" class="active">Live Haramain</a>
+            </li>
+          </ul>
+          <div class="dark-mode-toggle">
+            <span class="toggle-icon">☀️</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="dark-mode-toggle" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Clearer Section -->
+    <main>
+      <section class="section container fade-in">
+        <div class="section-title">
+          <h1>Live Haramain Streams</h1>
+          <p>
+            Experience the spiritual serenity of Makkah and Madina in real-time
+            via stable HLS streams.
+          </p>
+        </div>
+
+        <div class="mobile-tabs">
+          <button class="tab-btn active" onclick="switchVideo('makkah')">
+            Makkah
+          </button>
+          <button class="tab-btn" onclick="switchVideo('madina')">
+            Madina
+          </button>
+        </div>
+
+        <div class="video-grid">
+          <!-- Makkah Live -->
+          <div class="video-card" id="makkah-card">
+            <div class="video-container">
+              <video
+                id="makkah-video"
+                controls
+                autoplay
+                muted
+                playsinline
+                poster="https://haramain.com/wp-content/uploads/2021/11/Masjid-Al-Haram-Live.jpg"
+              ></video>
+            </div>
+            <div class="video-info">
+              <h3>Makkah Live - Al-Quran TV</h3>
+              <p>Direct official HLS broadcast from Masjid al-Haram, Makkah.</p>
+            </div>
+          </div>
+
+          <!-- Madina Live -->
+          <div class="video-card" id="madina-card">
+            <div class="video-container">
+              <video
+                id="madina-video"
+                controls
+                autoplay
+                muted
+                playsinline
+                poster="https://haramain.com/wp-content/uploads/2021/11/Masjid-An-Nabawi-Live.jpg"
+              ></video>
+            </div>
+            <div class="video-info">
+              <h3>Madina Live - Al-Sunnah TV</h3>
+              <p>
+                Direct official HLS broadcast from Al-Masjid an-Nabawi, Madina.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2026 Taealam alquran. All rights reserved.</p>
+        <div class="footer-bottom">
+          <p>
+            Connecting hearts to the holy places via official Saudi Broadcasting
+            Authority streams.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- HLS.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+    <script>
+      // Toggle Hamburger Menu
+      const hamburgerMenu = document.getElementById("hamburger-menu");
+      const navMenu = document.getElementById("nav-menu");
+
+      hamburgerMenu.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+
+      // Dark Mode Toggle
+      const darkModeToggle = document.getElementById("dark-mode-toggle");
+      const body = document.body;
+      const toggleIcon = document.querySelector(".toggle-icon");
+
+      // Check for saved dark mode preference
+      if (localStorage.getItem("darkMode") === "enabled") {
+        body.classList.add("dark-mode");
+        if (darkModeToggle) darkModeToggle.checked = true;
+        if (toggleIcon) toggleIcon.textContent = "🌙";
+      }
+
+      // Dark mode toggle event listener
+      darkModeToggle.addEventListener("change", () => {
+        if (darkModeToggle.checked) {
+          body.classList.add("dark-mode");
+          localStorage.setItem("darkMode", "enabled");
+          toggleIcon.textContent = "🌙";
+        } else {
+          body.classList.remove("dark-mode");
+          localStorage.setItem("darkMode", "disabled");
+          toggleIcon.textContent = "☀️";
+        }
+      });
+
+      // HLS Stream Initialization
+      function initStream(elementId, streamUrl) {
+        const video = document.getElementById(elementId);
+        if (Hls.isSupported()) {
+          const hls = new Hls({
+            enableWorker: true,
+            lowLatencyMode: true,
+          });
+          hls.loadSource(streamUrl);
+          hls.attachMedia(video);
+          hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            video
+              .play()
+              .catch((e) =>
+                console.log("Auto-play blocked, user interaction required: ", e)
+              );
+          });
+
+          hls.on(Hls.Events.ERROR, function (event, data) {
+            if (data.fatal) {
+              switch (data.type) {
+                case Hls.ErrorTypes.NETWORK_ERROR:
+                  console.log(
+                    "fatal network error encountered, try to recover"
+                  );
+                  hls.startLoad();
+                  break;
+                case Hls.ErrorTypes.MEDIA_ERROR:
+                  console.log("fatal media error encountered, try to recover");
+                  hls.recoverMediaError();
+                  break;
+                default:
+                  hls.destroy();
+                  break;
+              }
+            }
+          });
+        } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+          // Native HLS support for Safari
+          video.src = streamUrl;
+          video.addEventListener("loadedmetadata", function () {
+            video.play().catch((e) => console.log("Auto-play blocked: ", e));
+          });
+        }
+      }
+
+      // Initialize Streams
+      const makkahUrl =
+        "https://cdn-globecast.akamaized.net/live/eds/saudi_quran/hls_roku/index.m3u8";
+      const madinaUrl =
+        "https://cdn-globecast.akamaized.net/live/eds/saudi_sunnah/hls_roku/index.m3u8";
+
+      initStream("makkah-video", makkahUrl);
+      initStream("madina-video", madinaUrl);
+
+      // Mobile Video Switching
+      function switchVideo(type) {
+        const makkahCard = document.getElementById("makkah-card");
+        const madinaCard = document.getElementById("madina-card");
+        const makkahVideo = document.getElementById("makkah-video");
+        const madinaVideo = document.getElementById("madina-video");
+        const buttons = document.querySelectorAll(".tab-btn");
+
+        if (type === "makkah") {
+          makkahCard.style.display = "block";
+          madinaCard.classList.add("hidden-mobile");
+          buttons[0].classList.add("active");
+          buttons[1].classList.remove("active");
+          makkahVideo
+            .play()
+            .catch((e) => console.log("Makkah video auto-play blocked: ", e));
+          madinaVideo.pause();
+        } else {
+          makkahCard.style.display = "none";
+          madinaCard.classList.remove("hidden-mobile");
+          madinaCard.style.display = "block";
+          buttons[1].classList.add("active");
+          buttons[0].classList.remove("active");
+          madinaVideo
+            .play()
+            .catch((e) => console.log("Madina video auto-play blocked: ", e));
+          makkahVideo.pause();
+        }
+      }
+
+      // Initial check for mobile view
+      if (window.innerWidth <= 900) {
+        switchVideo("makkah");
+      }
+    </script>
+  </body>
+</html>
