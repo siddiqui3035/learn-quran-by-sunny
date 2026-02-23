@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="facicon.ico" />
+    <title>Islamic Events 2025 - Taealam alquran</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      :root {
+        --primary: #2e8b57;
+        --primary-light: #3ea86c;
+        --accent: #ffd700;
+        --glass-bg: rgba(255, 255, 255, 0.82);
+        --glass-border: rgba(255, 255, 255, 0.3);
+        --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+      }
+
+      .dark-mode {
+        --glass-bg: rgba(30, 41, 59, 0.75);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      }
+
+      .events-hero {
+        padding: 8rem 0 4rem;
+        text-align: center;
+        background: var(--calculator-bg);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .events-hero::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(46, 139, 87, 0.05) 0%,
+          transparent 70%
+        );
+        z-index: 0;
+      }
+
+      .events-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+        padding: 2rem 0 6rem;
+      }
+
+      .event-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 2rem;
+        box-shadow: var(--card-shadow);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .event-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary-light);
+      }
+
+      .event-card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 80px;
+        height: 80px;
+        background: var(--primary);
+        opacity: 0.03;
+        border-radius: 0 0 0 100%;
+        transition: all 0.4s ease;
+      }
+
+      .event-card:hover::after {
+        width: 120px;
+        height: 120px;
+        opacity: 0.08;
+      }
+
+      .event-date {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .event-date i {
+        font-size: 1.1rem;
+      }
+
+      .event-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0.5rem 0;
+        color: var(--text-dark);
+      }
+
+      .event-description {
+        font-size: 0.95rem;
+        color: #64748b;
+        line-height: 1.6;
+        flex-grow: 1;
+      }
+
+      .event-hijri {
+        font-family: "Amiri", serif;
+        font-size: 1.1rem;
+        color: var(--primary-light);
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .dark-mode .event-hijri {
+        border-top-color: rgba(255, 255, 255, 0.05);
+      }
+
+      .tag {
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        background: rgba(46, 139, 87, 0.1);
+        color: var(--primary);
+      }
+
+      .section-title h2 {
+        margin-bottom: 1.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .events-grid {
+          grid-template-columns: 1fr;
+          padding: 1rem 1rem 4rem;
+        }
+        .section-title h2 {
+          font-size: 2.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container header-container">
+        <!-- Navigation will be injected by nav-init.js -->
+      </div>
+    </header>
+
+    <main>
+      <section class="events-hero">
+        <div class="container">
+          <div class="section-title">
+            <h2>Islamic Events 2025</h2>
+            <p>
+              Key dates and holidays in the Islamic Hijri calendar for the year
+              2025.
+            </p>
+          </div>
+
+          <div class="events-grid">
+            <!-- Event 1 -->
+            <div class="event-card">
+              <div class="event-date">📅 January 27, 2025</div>
+              <h3 class="event-title">Lailat al Miraj</h3>
+              <p class="event-description">
+                Commemorates the Prophet Muhammad's night journey from Mecca to
+                Jerusalem and his ascension to the heavens.
+              </p>
+              <div class="event-hijri">
+                <span class="tag">Sacred Night</span>
+                <span>27 Rajab 1446</span>
+              </div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="event-card">
+              <div class="event-date">📅 February 14, 2025</div>
+              <h3 class="event-title">Lailat al Bara'ah</h3>
+              <p class="event-description">
+                The Night of Forgiveness (Shab-e-Barat), a time for prayer and
+                seeking repentance in preparation for Ramadan.
+              </p>
+              <div class="event-hijri">
+                <span class="tag">Observation</span>
+                <span>15 Shaban 1446</span>
+              </div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="event-card">
+              <div class="event-date">📅 March 1, 2025</div>
+              <h3 class="event-title">Ramadan Begins</h3>
+              <p class="event-description">
+                The start of the holiest month, dedicated to fasting, prayer,
+                reflection, and community service.
+              </p>
+              <div class="event-hijri">
+                <span class="tag">Fasting Month</span>
+                <span>1 Ramadan 1446</span>
+              </div>
+            </div>
+
+            <!-- Event 4 -->
+            <div class="event-card">
+              <div class="event-date">📅 March 27, 2025</div>
+              <h3 class="event-title">Laylat al-Qadr</h3>
+              <p class="event-description">
+                The Night of Power, better than a thousand months. Commemorates
+                the first revelation of the Quran.
+              </p>
+              <div class="event-hijri">
+                <span class="tag">Holiness</span>
+                <span>27 Ramadan 1446</span>
+              </div>
+            </div>
+
+            <!-- Event 5 -->
+            <div class="event-card">
+              <div class="event-date">📅 March 31, 2025</div>
+              <h3 class="event-title">Eid al-Fitr</h3>
+              <p class="event-description">
+                The festival of breaking the fast, marking the end of the
+                blessed month of Ramadan.
+              </p>
+              <div class="event-hijri">
+                <span class="tag">Major Festival</span>
+                <span>1 Shawwal 1446</span>
+              </div>
+            </div>
+
+            <!-- Event 6 -->
+            <div class="event-card">
+              <div class="event-date">📅 June 5, 2025</div>
+              <h3 class="event-title">Day of Arafah</h3>
+              <h3 class="event-title">Day of Arafah</h3>
+              <p class="event-description">
+                The most important day of the Hajj pilgrimage, standing on the
+                plains of Arafat in prayer.
+              </p>
+              <div class="event-hijri">
+                <span class="tag">Pilgrimage</span>
+                <span>9 Dhul-Hijjah 1446</span>
+              </div>
+            </div>
+
+            <!-- Event 7 -->
+            <div class="event-card">
+              <div class="event-date">📅 June 6, 2025</div>
+              <h3 class="event-title">Eid al-Adha</h3>
+              <p class="event-description">
+                The festival of sacrifice, commemorating the devotion of Prophet
+                Ibrahim (AS).
+              </p>
+              <div class="event-hijri">
+                <span class="tag">Major Festival</span>
+                <span>10 Dhul-Hijjah 1446</span>
+              </div>
+            </div>
+
+            <!-- Event 8 -->
+            <div class="event-card">
+              <div class="event-date">📅 June 26, 2025</div>
+              <h3 class="event-title">Islamic New Year</h3>
+              <p class="event-description">
+                Marks the beginning of the Hijri year 1447, commemorating the
+                Hijra of Prophet Muhammad (SAW).
+              </p>
+              <div class="event-hijri">
+                <span class="tag">New Year</span>
+                <span>1 Muharram 1447</span>
+              </div>
+            </div>
+
+            <!-- Event 9 -->
+            <div class="event-card">
+              <div class="event-date">📅 July 5, 2025</div>
+              <h3 class="event-title">Day of Ashura</h3>
+              <p class="event-description">
+                A day of fasting and historical significance across Islamic
+                history.
+              </p>
+              <div class="event-hijri">
+                <span class="tag">Sacred Day</span>
+                <span>10 Muharram 1447</span>
+              </div>
+            </div>
+
+            <!-- Event 10 -->
+            <div class="event-card">
+              <div class="event-date">📅 September 5, 2025</div>
+              <h3 class="event-title">Mawlid al-Nabi</h3>
+              <p class="event-description">
+                Celebration of the birth of the Prophet Muhammad (peace be upon
+                him).
+              </p>
+              <div class="event-hijri">
+                <span class="tag">Celebration</span>
+                <span>12 Rabi' al-Awwal 1447</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>About Taealam alquran</h3>
+            <p>
+              Taealam alquran is an online platform dedicated to helping you
+              learn the Quran with ease and confidence.
+            </p>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="hijri-calander.html">Hijri Calendar</a></li>
+              <li><a href="moon-age.html">Moon Age</a></li>
+              <li><a href="live-haramain.html">Live Haramain</a></li>
+              <li><a href="zakat-calculator.html">Zakat Calculator</a></li>
+              <li><a href="islamic-events.html">Islamic Events</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contact Us</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="mailto:s.h.siddiqui5830@gmail.com"
+                  >s.h.siddiqui5830@gmail.com</a
+                >
+              </li>
+              <li><a href="tel:+8801677273025">+880 1677273025</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          &copy; 2025 Taealam alquran. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script src="nav-init.js"></script>
+  </body>
+</html>

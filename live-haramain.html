@@ -159,37 +159,7 @@
   <body>
     <header>
       <div class="container header-container">
-        <div class="logo">
-          <div class="logo-icon">
-            <img src="logo.png" width="100px" alt="" />
-          </div>
-        </div>
-        <!-- Hamburger Menu Icon -->
-        <div class="hamburger-menu" id="hamburger-menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <!-- Navigation -->
-        <nav id="nav-menu">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#alphabet">Arabic Alphabet</a></li>
-            <li><a href="index.html#surahs">Surahs</a></li>
-            <li><a href="hijri-calander.html">Hijri Calendar</a></li>
-            <li><a href="moon-age.html">Moon Age</a></li>
-            <li>
-              <a href="live-haramain.html" class="active">Live Haramain</a>
-            </li>
-          </ul>
-          <div class="dark-mode-toggle">
-            <span class="toggle-icon">☀️</span>
-            <label class="toggle-switch">
-              <input type="checkbox" id="dark-mode-toggle" />
-              <span class="toggle-slider"></span>
-            </label>
-          </div>
-        </nav>
+        <!--#include virtual="nav.html" -->
       </div>
     </header>
 
@@ -257,53 +227,62 @@
 
     <footer>
       <div class="container">
-        <p>&copy; 2026 Taealam alquran. All rights reserved.</p>
-        <div class="footer-bottom">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>About Taealam alquran</h3>
+            <p>
+              Taealam alquran is an online platform dedicated to helping you
+              learn the Quran with ease and confidence.
+            </p>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="hijri-calander.html">Hijri Calendar</a></li>
+              <li><a href="moon-age.html">Moon Age</a></li>
+              <li><a href="live-haramain.html">Live Haramain</a></li>
+              <li><a href="zakat-calculator.html">Zakat Calculator</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contact Us</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="mailto:s.h.siddiqui5830@gmail.com"
+                  >s.h.siddiqui5830@gmail.com</a
+                >
+              </li>
+              <li><a href="tel:+8801677273025">+880 1677273025</a></li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="footer-bottom"
+          style="
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            font-size: 0.8rem;
+            color: #888;
+          "
+        >
           <p>
             Connecting hearts to the holy places via official Saudi Broadcasting
             Authority streams.
           </p>
+        </div>
+        <div class="copyright">
+          &copy; 2025 Taealam alquran. All rights reserved.
         </div>
       </div>
     </footer>
 
     <!-- HLS.js Library -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
+    <script src="nav-init.js"></script>
     <script>
-      // Toggle Hamburger Menu
-      const hamburgerMenu = document.getElementById("hamburger-menu");
-      const navMenu = document.getElementById("nav-menu");
-
-      hamburgerMenu.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-      });
-
-      // Dark Mode Toggle
-      const darkModeToggle = document.getElementById("dark-mode-toggle");
-      const body = document.body;
-      const toggleIcon = document.querySelector(".toggle-icon");
-
-      // Check for saved dark mode preference
-      if (localStorage.getItem("darkMode") === "enabled") {
-        body.classList.add("dark-mode");
-        if (darkModeToggle) darkModeToggle.checked = true;
-        if (toggleIcon) toggleIcon.textContent = "🌙";
-      }
-
-      // Dark mode toggle event listener
-      darkModeToggle.addEventListener("change", () => {
-        if (darkModeToggle.checked) {
-          body.classList.add("dark-mode");
-          localStorage.setItem("darkMode", "enabled");
-          toggleIcon.textContent = "🌙";
-        } else {
-          body.classList.remove("dark-mode");
-          localStorage.setItem("darkMode", "disabled");
-          toggleIcon.textContent = "☀️";
-        }
-      });
-
       // HLS Stream Initialization
       function initStream(elementId, streamUrl) {
         const video = document.getElementById(elementId);

@@ -421,34 +421,7 @@
     <!-- Header -->
     <header>
       <div class="container header-container">
-        <div class="logo">
-          <div class="logo-icon">
-            <img src="logo.png" width="100px" alt="Taealam alquran logo" />
-          </div>
-          <!-- <span>Taealam alquran </span> -->
-        </div>
-        <div class="hamburger-menu" id="hamburger-menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <nav id="nav-menu">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#alphabet">Arabic Alphabet</a></li>
-            <li><a href="index.html#surahs">Surahs</a></li>
-            <li><a href="hijri-calander.html">Hijri Calendar</a></li>
-            <li><a href="moon-age.html">Moon Age</a></li>
-            <li><a href="live-haramain.html">Live Haramain</a></li>
-          </ul>
-          <div class="dark-mode-toggle">
-            <span class="toggle-icon">☀️</span>
-            <label class="toggle-switch">
-              <input type="checkbox" id="dark-mode-toggle" />
-              <span class="toggle-slider"></span>
-            </label>
-          </div>
-        </nav>
+        <!--#include virtual="nav.html" -->
       </div>
     </header>
 
@@ -568,9 +541,10 @@
             <h3>Quick Links</h3>
             <ul class="footer-links">
               <li><a href="index.html">Home</a></li>
-              <li><a href="index.html#alphabet">Arabic Alphabet</a></li>
-              <li><a href="index.html#surahs">Surahs</a></li>
+              <li><a href="hijri-calander.html">Hijri Calendar</a></li>
               <li><a href="moon-age.html">Moon Age</a></li>
+              <li><a href="live-haramain.html">Live Haramain</a></li>
+              <li><a href="zakat-calculator.html">Zakat Calculator</a></li>
             </ul>
           </div>
           <div class="footer-column">
@@ -591,38 +565,8 @@
       </div>
     </footer>
 
+    <script src="nav-init.js"></script>
     <script>
-      // Toggle Hamburger Menu
-      const hamburgerMenu = document.getElementById("hamburger-menu");
-      const navMenu = document.getElementById("nav-menu");
-
-      hamburgerMenu.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-      });
-
-      // Dark Mode Toggle
-      const darkModeToggle = document.getElementById("dark-mode-toggle");
-      const body = document.body;
-      const toggleIcon = document.querySelector(".toggle-icon");
-
-      if (localStorage.getItem("darkMode") === "enabled") {
-        body.classList.add("dark-mode");
-        darkModeToggle.checked = true;
-        toggleIcon.textContent = "🌙";
-      }
-
-      darkModeToggle.addEventListener("change", () => {
-        if (darkModeToggle.checked) {
-          body.classList.add("dark-mode");
-          localStorage.setItem("darkMode", "enabled");
-          toggleIcon.textContent = "🌙";
-        } else {
-          body.classList.remove("dark-mode");
-          localStorage.setItem("darkMode", "disabled");
-          toggleIcon.textContent = "☀️";
-        }
-      });
-
       // Moon Logic
       document.getElementById("dateInput").valueAsDate = new Date();
 

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="facicon.ico" />
+    <title>রমজান ক্যালেন্ডার ২০২৬ - Taealam alquran</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      :root {
+        --deen-teal: #00a684;
+        --deen-bg: #f8fafc;
+        --text-main: #1e293b;
+        --text-muted: #64748b;
+      }
+
+      header {
+        background-color: var(--deen-teal) !important;
+      }
+
+      .dark-mode {
+        --deen-bg: #0b1120;
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+      }
+
+      body {
+        font-family: "Hind Siliguri", "Poppins", sans-serif;
+        background-color: var(--deen-bg);
+        color: var(--text-main);
+        transition: background-color 0.3s ease;
+      }
+
+      .dark-mode {
+        --deen-bg: #0b1120;
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+      }
+
+      .hero-location {
+        margin-top: 1.2rem;
+        display: inline-block;
+      }
+
+      .hero-location select {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 0.5rem 2.2rem 0.5rem 1.2rem;
+        border-radius: 50px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 0.9rem;
+        transition: all 0.3s ease;
+        outline: none;
+      }
+
+      .hero-location select:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+
+      .hero-location select option {
+        background: #fff;
+        color: #1e293b;
+        font-weight: 500;
+      }
+
+      .dark-mode .hero-location select option {
+        background: #0b1120;
+        color: #f8fafc;
+      }
+
+      .deen-hero {
+        background: var(--deen-teal);
+        border-radius: 24px;
+        margin: 2rem 0;
+        padding: 3rem;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 166, 132, 0.2);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+
+      .deen-hero.loaded {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .hero-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        position: relative;
+        z-index: 2;
+      }
+
+      .date-display {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        font-weight: 500;
+      }
+
+      .hijri-date {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-top: 0.8rem;
+      }
+
+      .moon-art {
+        position: absolute;
+        right: 2.5rem;
+        top: 2.5rem;
+        opacity: 0.2;
+        pointer-events: none;
+      }
+
+      .time-boxes {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-top: 3rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .time-box {
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 1.8rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+      }
+
+      .time-icon {
+        font-size: 2.5rem;
+      }
+
+      .time-info h4 {
+        font-size: 1rem;
+        font-weight: 500;
+        opacity: 0.9;
+        margin-bottom: 0.4rem;
+      }
+
+      .time-info p {
+        font-size: 1.6rem;
+        font-weight: 800;
+      }
+
+      .scheduler-section {
+        background: #fff;
+        border-radius: 24px;
+        padding: 3rem;
+        margin-bottom: 6rem;
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.03);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+
+      .scheduler-section.loaded {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .dark-mode .scheduler-section {
+        background: #111827;
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2.5rem;
+      }
+
+      .section-header h3 {
+        font-size: 1.6rem;
+        font-weight: 800;
+      }
+
+      .ashra-tabs {
+        display: flex;
+        background: #f1f5f9;
+        padding: 5px;
+        border-radius: 50px;
+        gap: 5px;
+      }
+
+      .dark-mode .ashra-tabs {
+        background: #1f2937;
+      }
+
+      .tab-btn {
+        padding: 0.6rem 2rem;
+        border-radius: 50px;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .tab-btn.active {
+        background: #fff;
+        color: var(--deen-teal);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .dark-mode .tab-btn.active {
+        background: #374151;
+        color: #fff;
+      }
+
+      .deen-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .deen-table th {
+        text-align: left;
+        padding: 1.5rem 1rem;
+        font-size: 1rem;
+        color: var(--text-muted);
+        border-bottom: 1px solid #f1f5f9;
+        font-weight: 500;
+      }
+
+      .deen-table td {
+        padding: 1.5rem 1rem;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #f8fafc;
+      }
+
+      .dark-mode .deen-table th {
+        border-bottom-color: #1f2937;
+      }
+      .dark-mode .deen-table td {
+        border-bottom-color: #111827;
+      }
+
+      .deen-table tr.current-roza {
+        background-color: rgba(0, 166, 132, 0.08);
+      }
+
+      .deen-table tr.current-roza td {
+        font-weight: 700;
+        color: var(--deen-teal);
+      }
+
+      @media (max-width: 991px) {
+        .time-boxes {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .deen-hero {
+          padding: 2rem;
+        }
+        .hijri-date {
+          font-size: 1.8rem;
+        }
+        .time-boxes {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+        .section-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1.5rem;
+        }
+        .ashra-tabs {
+          width: 100%;
+          justify-content: space-between;
+        }
+        .tab-btn {
+          padding: 0.6rem 1.2rem;
+          font-size: 0.9rem;
+          flex: 1;
+        }
+        .deen-table {
+          font-size: 1rem;
+        }
+        th,
+        td {
+          padding: 1.2rem 0.5rem !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container header-container">
+        <!-- Navigation will be injected -->
+      </div>
+    </header>
+
+    <main class="container" style="margin-top: 100px">
+      <!-- Hero Card -->
+      <div class="deen-hero">
+        <div class="hero-top">
+          <div class="hero-text">
+            <div class="date-display" id="today-gregorian">--</div>
+            <div class="hijri-date" id="today-hijri">--</div>
+            <div class="hero-location">
+              <select id="city-select">
+                <option value="Dhaka">Dhaka (ঢাকা)</option>
+                <option value="Chittagong">Chittagong (চট্টগ্রাম)</option>
+                <option value="Sylhet">Sylhet (সিলেট)</option>
+                <option value="Rajshahi">Rajshahi (রাজশাহী)</option>
+                <option value="Khulna">Khulna (খুলনা)</option>
+                <option value="Barisal">Barisal (বরিশাল)</option>
+                <option value="Rangpur">Rangpur (রংপুর)</option>
+                <option value="Mymensingh">Mymensingh (ময়মনসিংহ)</option>
+              </select>
+            </div>
+          </div>
+          <div class="moon-art">
+            <svg width="80" height="80" viewBox="0 0 100 100">
+              <path
+                d="M50 10A40 40 0 1 1 50 90A30 30 0 1 0 50 10"
+                fill="white"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <div class="time-boxes">
+          <div class="time-box">
+            <div class="time-icon">🌅</div>
+            <div class="time-info">
+              <h4>সাহরি শেষ</h4>
+              <p id="hero-sahri">--:-- --</p>
+            </div>
+          </div>
+          <div class="time-box">
+            <div class="time-icon">🌇</div>
+            <div class="time-info">
+              <h4>ইফতার</h4>
+              <p id="hero-iftar">--:-- --</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Schedule Section -->
+      <section class="scheduler-section">
+        <div class="section-header">
+          <h3>ইফতার ও সাহরির সময়</h3>
+          <div class="ashra-tabs">
+            <button class="tab-btn active" data-ashra="1">রহমত</button>
+            <button class="tab-btn" data-ashra="2">মাগফিরাত</button>
+            <button class="tab-btn" data-ashra="3">নাজাত</button>
+          </div>
+        </div>
+
+        <div class="table-outer">
+          <table class="deen-table">
+            <thead>
+              <tr>
+                <th>রোজা</th>
+                <th>দিন</th>
+                <th>সাহরি শেষ</th>
+                <th>ইফতার</th>
+              </tr>
+            </thead>
+            <tbody id="deen-table-body">
+              <!-- Content via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>About Taealam alquran</h3>
+            <p>
+              Taealam alquran is an online platform dedicated to helping you
+              learn the Quran with ease and confidence.
+            </p>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="hijri-calander.html">Hijri Calendar</a></li>
+              <li><a href="moon-age.html">Moon Age</a></li>
+              <li><a href="live-haramain.html">Live Haramain</a></li>
+              <li><a href="zakat-calculator.html">Zakat Calculator</a></li>
+              <li><a href="islamic-events.html">Islamic Events</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contact Us</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="mailto:s.h.siddiqui5830@gmail.com"
+                  >s.h.siddiqui5830@gmail.com</a
+                >
+              </li>
+              <li><a href="tel:+8801677273025">+880 1677273025</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          &copy; 2025 Taealam alquran. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script src="nav-init.js"></script>
+    <script>
+      const BN_DIGITS = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+      const BN_DAYS = {
+        Saturday: "শনিবার",
+        Sunday: "রবিবার",
+        Monday: "সোমবার",
+        Tuesday: "মঙ্গলবার",
+        Wednesday: "বুধবার",
+        Thursday: "বৃহস্পতিবার",
+        Friday: "শুক্রবার",
+      };
+      const BN_MONTHS = [
+        "জানুয়ারি",
+        "ফেব্রুয়ারি",
+        "মার্চ",
+        "এপ্রিল",
+        "মে",
+        "জুন",
+        "জুলাই",
+        "আগস্ট",
+        "সেপ্টেম্বর",
+        "অক্টোবর",
+        "নভেম্বর",
+        "ডিসেম্বর",
+      ];
+
+      function toBnNum(num) {
+        return String(num)
+          .split("")
+          .map((d) => BN_DIGITS[d] || d)
+          .join("");
+      }
+
+      function toBnTime(time24) {
+        if (!time24) return "--:-- --";
+        const [h, m] = time24.split(":");
+        let hours = parseInt(h);
+        const period = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12 || 12;
+        return `${toBnNum(hours)}:${toBnNum(m)} ${period}`;
+      }
+
+      let currentCalendarData = [];
+      let currentAshra = 1;
+
+      async function fetchRamadanData(city) {
+        try {
+          // Ramadan 1447 AH corresponds to Feb/Mar 2026
+          const resFeb = await fetch(
+            `https://api.aladhan.com/v1/calendarByCity/2026/2?city=${city}&country=Bangladesh&method=1`
+          );
+          const dataFeb = await resFeb.json();
+
+          const resMar = await fetch(
+            `https://api.aladhan.com/v1/calendarByCity/2026/3?city=${city}&country=Bangladesh&method=1`
+          );
+          const dataMar = await resMar.json();
+
+          const combined = [...dataFeb.data, ...dataMar.data];
+          // Filter for Ramadan 1447 (Feb-Mar 2026)
+          currentCalendarData = combined.filter((d) => {
+            const hijri = d.date.hijri;
+            return hijri.month.number === 9 && hijri.year === "1447";
+          });
+
+          updateUI();
+        } catch (err) {
+          console.error("Fetch error:", err);
+        }
+      }
+
+      function updateUI() {
+        const now = new Date();
+
+        const todayData =
+          currentCalendarData.find((d) => {
+            const dDate = new Date(d.date.readable);
+            return dDate.toDateString() === now.toDateString();
+          }) || currentCalendarData[0];
+
+        if (todayData) {
+          const bnDay = BN_DAYS[todayData.date.gregorian.weekday.en];
+          const bnDate = toBnNum(now.getDate());
+          const bnMonth = BN_MONTHS[now.getMonth()];
+          const bnYear = toBnNum(now.getFullYear());
+
+          document.getElementById(
+            "today-gregorian"
+          ).textContent = `${bnDay}, ${bnDate} ${bnMonth} ${bnYear}`;
+          document.getElementById("today-hijri").textContent = `${toBnNum(
+            todayData.date.hijri.day
+          )} রমজান, ${toBnNum(todayData.date.hijri.year)} হিজরী`;
+
+          document.getElementById("hero-sahri").textContent = `ভোর ${toBnTime(
+            todayData.timings.Fajr.split(" ")[0]
+          )}`;
+          document.getElementById(
+            "hero-iftar"
+          ).textContent = `সন্ধ্যা ${toBnTime(
+            todayData.timings.Maghrib.split(" ")[0]
+          )}`;
+
+          const rozaEl = document.getElementById("roza-count");
+          if (rozaEl)
+            rozaEl.textContent = `${toBnNum(todayData.date.hijri.day)}/৩০`;
+        }
+
+        document.querySelector(".deen-hero").classList.add("loaded");
+        document.querySelector(".scheduler-section").classList.add("loaded");
+        renderTable();
+      }
+
+      function renderTable() {
+        const tbody = document.getElementById("deen-table-body");
+        tbody.innerHTML = "";
+
+        const start = (currentAshra - 1) * 10;
+        const ashraData = currentCalendarData.slice(start, start + 10);
+
+        const now = new Date();
+
+        ashraData.forEach((day) => {
+          const tr = document.createElement("tr");
+          const isToday =
+            new Date(day.date.readable).toDateString() === now.toDateString();
+          if (isToday) tr.classList.add("current-roza");
+
+          const rozaNum = toBnNum(day.date.hijri.day);
+          const dayBn = BN_DAYS[day.date.gregorian.weekday.en];
+          const sahri = toBnTime(day.timings.Fajr.split(" ")[0]);
+          const iftar = toBnTime(day.timings.Maghrib.split(" ")[0]);
+
+          tr.innerHTML = `
+                    <td>${rozaNum}</td>
+                    <td>${dayBn}</td>
+                    <td>${sahri}</td>
+                    <td>${iftar}</td>
+                `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      // Event Listeners
+      document.getElementById("city-select").addEventListener("change", (e) => {
+        fetchRamadanData(e.target.value);
+      });
+
+      document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelector(".tab-btn.active").classList.remove("active");
+          btn.classList.add("active");
+          currentAshra = parseInt(btn.dataset.ashra);
+          renderTable();
+        });
+      });
+
+      // Init
+      fetchRamadanData("Dhaka");
+    </script>
+  </body>
+</html>
